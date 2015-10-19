@@ -1,0 +1,117 @@
+/*
+ * Copyright (C) 2015 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+#include "imx7-peb-av-02.dtsi"
+
+/ {
+	model = "Phytec i.MX7 phyBOARD";
+	compatible = "phytec,imx7-pba-c-09", "phytec,imx7-phycore-som", "fsl,imx7d";
+
+};
+
+&iomuxc {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_hog_1>;
+
+	imx7d-phycore {
+		pinctrl_hog_1: hoggrp-1 {
+			fsl,pins = <
+				MX7D_PAD_SD1_CD_B__GPIO5_IO0		0x59 /* SD1 CD */
+				MX7D_PAD_SD2_WP__GPIO5_IO10		0x59 /* PCIe Disable */
+				MX7D_PAD_SAI1_RX_BCLK__GPIO6_IO17	0x59 /* PCIe Reset */
+			>;
+		};
+
+		pinctrl_uart5: uart5grp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO06__UART5_RX_DATA	0x79
+				MX7D_PAD_GPIO1_IO07__UART5_TX_DATA	0x79
+				MX7D_PAD_I2C3_SDA__UART5_DCE_RTS	0x79
+				MX7D_PAD_I2C3_SCL__UART5_DCE_CTS	0x79
+			>;
+		};
+
+		pinctrl_usdhc1: usdhc1grp {
+			fsl,pins = <
+				MX7D_PAD_SD1_CMD__SD1_CMD		0x59
+				MX7D_PAD_SD1_CLK__SD1_CLK		0x19
+				MX7D_PAD_SD1_DATA0__SD1_DATA0		0x59
+				MX7D_PAD_SD1_DATA1__SD1_DATA1		0x59
+				MX7D_PAD_SD1_DATA2__SD1_DATA2		0x59
+				MX7D_PAD_SD1_DATA3__SD1_DATA3		0x59
+			>;
+		};
+
+		pinctrl_usdhc1_100mhz: usdhc1grp_100mhz {
+			fsl,pins = <
+				MX7D_PAD_SD1_CMD__SD1_CMD		0x5a
+				MX7D_PAD_SD1_CLK__SD1_CLK		0x1a
+				MX7D_PAD_SD1_DATA0__SD1_DATA0		0x5a
+				MX7D_PAD_SD1_DATA1__SD1_DATA1		0x5a
+				MX7D_PAD_SD1_DATA2__SD1_DATA2		0x5a
+				MX7D_PAD_SD1_DATA3__SD1_DATA3		0x5a
+			>;
+		};
+
+		pinctrl_usdhc1_200mhz: usdhc1grp_200mhz {
+			fsl,pins = <
+				MX7D_PAD_SD1_CMD__SD1_CMD		0x5b
+				MX7D_PAD_SD1_CLK__SD1_CLK		0x1b
+				MX7D_PAD_SD1_DATA0__SD1_DATA0		0x5b
+				MX7D_PAD_SD1_DATA1__SD1_DATA1		0x5b
+				MX7D_PAD_SD1_DATA2__SD1_DATA2		0x5b
+				MX7D_PAD_SD1_DATA3__SD1_DATA3		0x5b
+			>;
+		};
+	};
+};
+
+&uart5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart5>;
+	assigned-clocks = <&clks IMX7D_UART5_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
+	fsl,uart-has-rtscts;
+	status = "disabled";
+};
+
+&usdhc1 {
+	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+	pinctrl-0 = <&pinctrl_usdhc1>;
+	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
+	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
+	cd-gpios = <&gpio5 0 0>;
+
+/* TODO: if issues with tuning process, set delay cell step via property "tuning-step"
+ *(https://www.kernel.org/doc/Documentation/devicetree/bindings/mmc/fsl-imx-esdhc.txt)
+ */
+	enable-sdio-wakeup;
+	keep-power-in-suspend;
+	status = "disabled";
+};
+
+&pcie {
+	pinctrl-names = "default";
+
+	/* Needed if J22 is set to 2+3
+	 * reset-gpio = <&gpio6 17  GPIO_ACTIVE_LOW>;
+	 */
+
+	disable-gpio = <&gpio5 10 GPIO_ACTIVE_LOW>;
+	status = "disabled";
+};
+
+/*TODO: CAN1 */
+
+/*TODO: ETH2 */
+
+/*TODO: USB1 */
+
+/*TODO: USB2 */
+
+/*TODO: User LED */
