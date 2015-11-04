@@ -35,3 +35,28 @@
 &pcie {
 	status = "okay";
 };
+
+/* Touch controller
+ * TODO: backport DTS support for driver
+ */
+&i2c2 {
+	status = "disabled";
+};
+
+&ft5406 {
+	status = "disabled";
+};
+
+/**** LCD-018 ****/
+&lcdif {
+	status = "okay";
+};
+
+/* backlight */
+&pwm4 {
+	status = "okay";
+};
+
+&backlight {
+	status = "okay";
+};
