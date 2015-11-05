@@ -12,6 +12,31 @@
 	model = "Phytec i.MX7 phyBOARD";
 	compatible = "phytec,imx7-pba-c-09", "phytec,imx7-phycore-som", "fsl,imx7d";
 
+	regulators {
+		compatible = "simple-bus";
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		reg_usb_otg1_vbus: regulator@0 {
+			compatible = "regulator-fixed";
+			reg = <0>;
+			regulator-name = "usb_otg1_vbus";
+			regulator-min-microvolt = <5000000>;
+			regulator-max-microvolt = <5000000>;
+			gpio = <&gpio1 5 GPIO_ACTIVE_HIGH>;
+			enable-active-high;
+		};
+
+		reg_usb_otg2_vbus: regulator@1 {
+			compatible = "regulator-fixed";
+			reg = <1>;
+			regulator-name = "usb_otg2_vbus";
+			regulator-min-microvolt = <5000000>;
+			regulator-max-microvolt = <5000000>;
+			gpio = <&gpio4 7 GPIO_ACTIVE_HIGH>;
+			enable-active-high;
+		};
+	};
 };
 
 &iomuxc {
@@ -24,6 +49,8 @@
 				MX7D_PAD_SD1_CD_B__GPIO5_IO0		0x59 /* SD1 CD */
 				MX7D_PAD_SD2_WP__GPIO5_IO10		0x59 /* PCIe Disable */
 				MX7D_PAD_SAI1_RX_BCLK__GPIO6_IO17	0x59 /* PCIe Reset */
+				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x14 /* USB1 pwr */
+				MX7D_PAD_UART3_CTS_B__GPIO4_IO7		0x14 /* USB2 pwr */
 			>;
 		};
 
@@ -110,8 +137,15 @@
 
 /*TODO: ETH2 */
 
-/*TODO: USB1 */
+&usbotg1 {
+	vbus-supply = <&reg_usb_otg1_vbus>;
+	dr_mode = "host";
+	status = "disabled";
+};
 
-/*TODO: USB2 */
+&usbotg2 {
+	vbus-supply = <&reg_usb_otg2_vbus>;
+	status = "disabled";
+};
 
 /*TODO: User LED */
