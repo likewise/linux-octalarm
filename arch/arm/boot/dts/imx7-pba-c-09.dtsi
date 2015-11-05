@@ -36,6 +36,16 @@
 			gpio = <&gpio4 7 GPIO_ACTIVE_HIGH>;
 			enable-active-high;
 		};
+
+		reg_can1_3v3: regulator@2 {
+			compatible = "regulator-fixed";
+			reg = <2>;
+			regulator-name = "can1-3v3";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			gpio = <&gpio5 2 GPIO_ACTIVE_HIGH>;
+			enable-active-high;
+		};
 	};
 };
 
@@ -51,6 +61,7 @@
 				MX7D_PAD_SAI1_RX_BCLK__GPIO6_IO17	0x59 /* PCIe Reset */
 				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x14 /* USB1 pwr */
 				MX7D_PAD_UART3_CTS_B__GPIO4_IO7		0x14 /* USB2 pwr */
+				MX7D_PAD_SD1_RESET_B__GPIO5_IO2		0x59 /* CAN1 Enable */
 			>;
 		};
 
@@ -95,6 +106,13 @@
 				MX7D_PAD_SD1_DATA3__SD1_DATA3		0x5b
 			>;
 		};
+
+		pinctrl_flexcan1: flexcan1grp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO12__FLEXCAN1_RX	0x59
+				MX7D_PAD_GPIO1_IO13__FLEXCAN1_TX	0x59
+			>;
+		};
 	};
 };
 
@@ -133,7 +151,13 @@
 	status = "disabled";
 };
 
-/*TODO: CAN1 */
+&flexcan1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_flexcan1>;
+	xceiver-supply = <&reg_can1_3v3>;
+	status = "disabled";
+};
+
 
 /*TODO: ETH2 */
 

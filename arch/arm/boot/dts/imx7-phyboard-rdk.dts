@@ -46,6 +46,10 @@
 	status = "okay";
 };
 
+&flexcan1 {
+	status = "okay";
+};
+
 /* Touch controller
  * TODO: backport DTS support for driver
  */
