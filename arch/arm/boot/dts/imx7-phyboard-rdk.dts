@@ -32,6 +32,10 @@
 	status = "okay";
 };
 
+&fec2 {
+	status = "okay";
+};
+
 &pcie {
 	status = "okay";
 };
