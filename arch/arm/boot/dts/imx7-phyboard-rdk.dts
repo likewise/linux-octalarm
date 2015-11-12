@@ -21,6 +21,14 @@
 	status = "okay";
 };
 
+&qspi1 {
+	status = "okay";
+};
+
+&serial_flash {
+	status = "okay";
+};
+
 
 /**** Carrier Board - PBA-C-09 ****/
 
