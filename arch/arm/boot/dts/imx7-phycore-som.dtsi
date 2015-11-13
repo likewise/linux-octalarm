@@ -23,7 +23,7 @@
 };
 
 &i2c1 {
-	clock-frequency = <100000>;
+	clock-frequency = <400000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c1>;
 	status = "okay";
@@ -117,6 +117,12 @@
 				regulator-always-on;
 			};
 		};
+	};
+	i2c_eeprom: eeprom@50 {
+		compatible = "atmel,24c32";
+		pagesize = <32>;
+		reg = <0x50>;
+		status = "disabled";
 	};
 };
 
@@ -276,7 +282,5 @@
 		status = "disabled";
 	};
 };
-
-/*TODO: EEPROM */
 
 /*TODO: External RTC */

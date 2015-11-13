@@ -29,6 +29,10 @@
 	status = "okay";
 };
 
+&i2c_eeprom {
+	status = "okay";
+};
+
 
 /**** Carrier Board - PBA-C-09 ****/
 
