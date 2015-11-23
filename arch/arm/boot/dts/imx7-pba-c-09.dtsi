@@ -64,6 +64,7 @@
 				MX7D_PAD_SD1_RESET_B__GPIO5_IO2		0x59 /* CAN1 Enable */
 				MX7D_PAD_GPIO1_IO09__GPIO1_IO9 		0x59 /* ETH2 Int_N */
 				MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x59 /* ETH2 Reset_n */
+				MX7D_PAD_EPDC_DATA10__GPIO2_IO10	0x59 /* User Button */
 			>;
 		};
 
