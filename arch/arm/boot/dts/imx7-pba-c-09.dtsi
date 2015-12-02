@@ -88,28 +88,6 @@
 			>;
 		};
 
-		pinctrl_usdhc1_100mhz: usdhc1grp_100mhz {
-			fsl,pins = <
-				MX7D_PAD_SD1_CMD__SD1_CMD		0x5a
-				MX7D_PAD_SD1_CLK__SD1_CLK		0x1a
-				MX7D_PAD_SD1_DATA0__SD1_DATA0		0x5a
-				MX7D_PAD_SD1_DATA1__SD1_DATA1		0x5a
-				MX7D_PAD_SD1_DATA2__SD1_DATA2		0x5a
-				MX7D_PAD_SD1_DATA3__SD1_DATA3		0x5a
-			>;
-		};
-
-		pinctrl_usdhc1_200mhz: usdhc1grp_200mhz {
-			fsl,pins = <
-				MX7D_PAD_SD1_CMD__SD1_CMD		0x5b
-				MX7D_PAD_SD1_CLK__SD1_CLK		0x1b
-				MX7D_PAD_SD1_DATA0__SD1_DATA0		0x5b
-				MX7D_PAD_SD1_DATA1__SD1_DATA1		0x5b
-				MX7D_PAD_SD1_DATA2__SD1_DATA2		0x5b
-				MX7D_PAD_SD1_DATA3__SD1_DATA3		0x5b
-			>;
-		};
-
 		pinctrl_flexcan1: flexcan1grp {
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO12__FLEXCAN1_RX	0x59
@@ -146,15 +124,11 @@
 };
 
 &usdhc1 {
-	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc1>;
-	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
-	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
 	cd-gpios = <&gpio5 0 0>;
+	no-1-8-v; /* Fixed voltage supply, doesn't support vsel */
 
-/* TODO: if issues with tuning process, set delay cell step via property "tuning-step"
- *(https://www.kernel.org/doc/Documentation/devicetree/bindings/mmc/fsl-imx-esdhc.txt)
- */
 	enable-sdio-wakeup;
 	keep-power-in-suspend;
 	status = "disabled";
