@@ -68,22 +68,12 @@
 				MX7D_PAD_SD1_CD_B__GPIO5_IO0		0x59 /* SD1 CD */
 				MX7D_PAD_SD2_WP__GPIO5_IO10		0x59 /* PCIe Disable */
 				MX7D_PAD_SAI1_RX_BCLK__GPIO6_IO17	0x59 /* PCIe Reset */
-				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x14 /* USB1 pwr */
 				MX7D_PAD_UART3_CTS_B__GPIO4_IO7		0x14 /* USB2 pwr */
 				MX7D_PAD_SD1_RESET_B__GPIO5_IO2		0x59 /* CAN1 Enable */
 				MX7D_PAD_GPIO1_IO09__GPIO1_IO9 		0x59 /* ETH2 Int_N */
 				MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x59 /* ETH2 Reset_n */
 				MX7D_PAD_EPDC_DATA10__GPIO2_IO10	0x59 /* User Button */
 				MX7D_PAD_EPDC_DATA13__GPIO2_IO13 	0x59 /* Boot Circuit Buffer Enable */
-			>;
-		};
-
-		pinctrl_uart5: uart5grp {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO06__UART5_RX_DATA	0x79
-				MX7D_PAD_GPIO1_IO07__UART5_TX_DATA	0x79
-				MX7D_PAD_I2C3_SDA__UART5_DCE_RTS	0x79
-				MX7D_PAD_I2C3_SCL__UART5_DCE_CTS	0x79
 			>;
 		};
 
@@ -124,12 +114,31 @@
 	};
 };
 
+&iomuxc_lpsr {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_hog_2>;
+
+	imx7d-phycore {
+		pinctrl_hog_2: hoggrp-2 {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x14 /* USB1 pwr */
+			>;
+		};
+
+		pinctrl_uart5: uart5grp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO06__UART5_RX_DATA	0x79
+				MX7D_PAD_GPIO1_IO07__UART5_TX_DATA	0x79
+			>;
+		};
+	};
+};
+
 &uart5 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart5>;
 	assigned-clocks = <&clks IMX7D_UART5_ROOT_SRC>;
 	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
-	fsl,uart-has-rtscts;
 	status = "disabled";
 };
 
