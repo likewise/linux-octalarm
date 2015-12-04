@@ -127,8 +127,8 @@
 
 		pinctrl_uart5: uart5grp {
 			fsl,pins = <
-				MX7D_PAD_GPIO1_IO06__UART5_RX_DATA	0x79
-				MX7D_PAD_GPIO1_IO07__UART5_TX_DATA	0x79
+				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79
+				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79
 			>;
 		};
 	};
