@@ -60,10 +60,10 @@
 
 &iomuxc {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_hog_1>;
+	pinctrl-0 = <&pinctrl_hog_1 &pinctrl_hog_2>;
 
 	imx7d-phycore {
-		pinctrl_hog_1: hoggrp-1 {
+		pinctrl_hog_2: hoggrp-2 {
 			fsl,pins = <
 				MX7D_PAD_SD1_CD_B__GPIO5_IO0		0x59 /* SD1 CD */
 				MX7D_PAD_SD2_WP__GPIO5_IO10		0x59 /* PCIe Disable */
@@ -119,7 +119,7 @@
 	pinctrl-0 = <&pinctrl_hog_2>;
 
 	imx7d-phycore {
-		pinctrl_hog_2: hoggrp-2 {
+		pinctrl_hog_lpsr_1: hoggrp-lpsr_1 {
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x14 /* USB1 pwr */
 			>;

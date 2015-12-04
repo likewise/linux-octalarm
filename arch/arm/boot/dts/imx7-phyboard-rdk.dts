@@ -10,6 +10,17 @@
 #include "imx7-phycore-som.dtsi"
 #include "imx7-pba-c-09.dtsi"
 
+&iomuxc {
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_hog_1 &pinctrl_hog_2>;
+};
+
+&iomuxc_lpsr {
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_hog_lpsr_1>;
+};
+
+
 /**** SOM - PCM-061 ****/
 
 &fec1 {
