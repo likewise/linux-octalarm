@@ -16,6 +16,7 @@
 		default-brightness-level = <6>;
 		power-supply = <&lcd_3v3>;
 		pwms = <&pwm4 0 5000000>;
+		enable-gpios = <&gpio1 1 0>;
 		status = "disabled";
 	};
 
@@ -81,10 +82,20 @@
 				MX7D_PAD_EPDC_DATA14__GPIO2_IO14	0x59
 			>;
 		};
-
+	};
+};
+&iomuxc_lpsr {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_hog_lpsr_1 &pinctrl_hog_lpsr_lcd>;
+	imx7d-phycore {
 		pinctrl_pwm4: pwm4grp {
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO00__PWM4_OUT		0x110b0
+			>;
+		};
+		pinctrl_hog_lpsr_lcd: hoggrp_lpsr_lcd {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO01__GPIO1_IO1		0x59
 			>;
 		};
 	};

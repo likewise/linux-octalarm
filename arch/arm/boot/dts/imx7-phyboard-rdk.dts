@@ -17,7 +17,7 @@
 
 &iomuxc_lpsr {
         pinctrl-names = "default";
-        pinctrl-0 = <&pinctrl_hog_lpsr_1>;
+        pinctrl-0 = <&pinctrl_hog_lpsr_1 &pinctrl_hog_lpsr_lcd>;
 };
 
 
