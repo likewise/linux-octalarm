@@ -33,11 +33,11 @@
 };
 
 &qspi1 {
-	status = "okay";
+	status = "disabled";
 };
 
 &serial_flash {
-	status = "okay";
+	status = "disabled";
 };
 
 &i2c_eeprom {
