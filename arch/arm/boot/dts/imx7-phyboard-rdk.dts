@@ -12,7 +12,7 @@
 
 &iomuxc {
         pinctrl-names = "default";
-        pinctrl-0 = <&pinctrl_hog_1 &pinctrl_hog_2>;
+        pinctrl-0 = <&pinctrl_hog_1 &pinctrl_hog_2 &pinctrl_hog_lcd>;
 };
 
 &iomuxc_lpsr {
@@ -77,23 +77,19 @@
 	status = "okay";
 };
 
-/* Touch controller
- * TODO: backport DTS support for driver
- */
+/* PEB-AV-02: touch controller ft5406, LCD and PWM backlight control */
 &i2c2 {
-	status = "disabled";
+	status = "okay";
 };
 
 &ft5406 {
-	status = "disabled";
+	status = "okay";
 };
 
-/**** LCD-018 ****/
 &lcdif {
 	status = "okay";
 };
 
-/* backlight */
 &pwm4 {
 	status = "okay";
 };
