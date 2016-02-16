@@ -9,6 +9,7 @@
 
 #include "imx7-phycore-som.dtsi"
 #include "imx7-pba-c-09.dtsi"
+#include "imx7-peb-eval-02.dtsi"
 
 &iomuxc {
         pinctrl-names = "default";
@@ -95,5 +96,31 @@
 };
 
 &backlight {
+	status = "okay";
+};
+
+/* Interfaces on PEB-EVAL-02 */
+
+&i2c4 {
+	status = "okay";
+};
+
+&i2c4_eeprom {
+	status = "okay";
+};
+
+&phytec_leds {
+	status = "okay";
+};
+
+&phytec_buttons {
+	status = "okay";
+};
+
+&uart1 {
+	status = "okay";
+};
+
+&uart2 {
 	status = "okay";
 };
