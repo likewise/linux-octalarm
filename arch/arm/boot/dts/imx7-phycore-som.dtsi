@@ -275,7 +275,6 @@
 &qspi1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_qspi1_1>;
-	ddrsmp=<0>;
 	status = "disabled";
 
 	serial_flash: n25q128a13@0 {
@@ -283,7 +282,7 @@
 		#size-cells = <1>;
 		compatible = "micron,n25q128a13";
 		reg = <0>;
-		spi-max-frequency = <108000000>;
+		spi-max-frequency = <27000000>; /* 108MHz/4 */
 		m25p,fast-read;
 		status = "disabled";
 	};
