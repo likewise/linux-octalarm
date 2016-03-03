@@ -124,6 +124,12 @@
 		reg = <0x50>;
 		status = "disabled";
 	};
+
+	i2c_rtc: rtc@68 {
+		compatible = "mc,rv4162";
+		reg=<0x68>;
+		status = "disabled";
+	};
 };
 
 &iomuxc {
@@ -282,5 +288,3 @@
 		status = "disabled";
 	};
 };
-
-/*TODO: External RTC */

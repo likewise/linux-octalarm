@@ -45,6 +45,9 @@
 	status = "okay";
 };
 
+&i2c_rtc {
+	status = "okay";
+};
 
 /**** Carrier Board - PBA-C-09 ****/
 
