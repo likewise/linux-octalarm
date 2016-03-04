@@ -15,8 +15,6 @@
 		brightness-levels = <0 4 8 16 32 64 128 255>;
 		default-brightness-level = <6>;
 		power-supply = <&lcd_3v3>;
-		pwms = <&pwm4 0 5000000>;
-		enable-gpios = <&gpio1 1 0>;
 		status = "disabled";
 	};
 
@@ -31,12 +29,6 @@
 
 &iomuxc {
 	imx7d-phycore {
-		pinctrl_hog_lcd: hog_lcdgrp {
-			fsl,pins = <
-				MX7D_PAD_LCD_RESET__GPIO3_IO4	0x79
-			>;
-		};
-
 		pinctrl_lcdif_ctrl: lcdifctrlgrp {
 			fsl,pins = <
 				MX7D_PAD_LCD_CLK__LCD_CLK	0x7e
@@ -72,35 +64,6 @@
 				MX7D_PAD_LCD_DATA21__LCD_DATA21	0x7e
 				MX7D_PAD_LCD_DATA22__LCD_DATA22	0x7e
 				MX7D_PAD_LCD_DATA23__LCD_DATA23	0x7e
-			>;
-		};
-
-		pinctrl_i2c2: i2c2grp {
-			fsl,pins = <
-				MX7D_PAD_I2C2_SCL__I2C2_SCL		0x4000007f
-				MX7D_PAD_I2C2_SDA__I2C2_SDA		0x4000007f
-			>;
-		};
-
-		pinctrl_edt_ts_irq: tsirqgrp {
-			fsl,pins = <
-				MX7D_PAD_EPDC_DATA14__GPIO2_IO14	0x59
-			>;
-		};
-	};
-};
-&iomuxc_lpsr {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_hog_lpsr_1 &pinctrl_hog_lpsr_lcd>;
-	imx7d-phycore {
-		pinctrl_pwm4: pwm4grp {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO00__PWM4_OUT		0x110b0
-			>;
-		};
-		pinctrl_hog_lpsr_lcd: hoggrp_lpsr_lcd {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO01__GPIO1_IO1		0x59
 			>;
 		};
 	};
@@ -139,25 +102,8 @@
 	};
 };
 
-&i2c2 {
-	clock-frequency = <400000>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_i2c2>;
-	status = "disabled";
-	ft5406: ft5406@38 {
-		compatible = "edt,edt-ft5406", "edt,edt-ft5x06";
-		reg = <0x38>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_edt_ts_irq>;
-		interrupt-parent = <&gpio2>;
-		interrupts = <14 0>;
-		reset-gpios = <&gpio3 4 GPIO_ACTIVE_LOW>;
-		status = "disabled";
-	};
-};
-
-&pwm4 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_pwm4>;
+&ft5406 {
+	compatible = "edt,edt-ft5406", "edt,edt-ft5x06";
+	reg = <0x38>;
 	status = "disabled";
 };

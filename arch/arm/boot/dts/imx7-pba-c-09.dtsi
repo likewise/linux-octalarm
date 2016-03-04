@@ -6,8 +6,6 @@
  * published by the Free Software Foundation.
  */
 
-#include "imx7-peb-av-02.dtsi"
-
 / {
 	model = "Phytec i.MX7 phyBOARD";
 	compatible = "phytec,imx7-pba-c-09", "phytec,imx7-phycore-som", "fsl,imx7d";
@@ -206,4 +204,74 @@
 	status = "disabled";
 };
 
-/*TODO: User LED */
+/* DTS pinmuxing and bindings for LCD adapter PEB-AV-02 */
+
+&iomuxc {
+	imx7d-phycore {
+		pinctrl_hog_lcd: hog_lcdgrp {
+			fsl,pins = <
+				MX7D_PAD_LCD_RESET__GPIO3_IO4		0x79
+			>;
+		};
+
+		pinctrl_i2c2: i2c2grp {
+			fsl,pins = <
+				MX7D_PAD_I2C2_SCL__I2C2_SCL		0x4000007f
+				MX7D_PAD_I2C2_SDA__I2C2_SDA		0x4000007f
+			>;
+		};
+
+		pinctrl_edt_ts_irq: tsirqgrp {
+			fsl,pins = <
+				MX7D_PAD_EPDC_DATA14__GPIO2_IO14	0x59
+			>;
+		};
+	};
+};
+
+&iomuxc_lpsr {
+	imx7d-phycore {
+		pinctrl_pwm4: pwm4grp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO00__PWM4_OUT		0x110b0
+			>;
+		};
+
+		pinctrl_hog_lpsr_lcd: hoggrp_lpsr_lcd {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO01__GPIO1_IO1		0x59
+			>;
+		};
+	};
+};
+
+&i2c2 {
+	clock-frequency = <400000>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_i2c2>;
+ 	status = "disabled";
+
+	ft5406: ft5406@38 {
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_edt_ts_irq>;
+		interrupt-parent = <&gpio2>;
+		interrupts = <14 0>;
+		reset-gpios = <&gpio3 4 GPIO_ACTIVE_LOW>;
+		status = "disabled";
+	};
+};
+
+#include "imx7-peb-av-02.dtsi"
+
+&pwm4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_pwm4>;
+	status = "disabled";
+};
+
+&backlight {
+	pwms = <&pwm4 0 5000000>;
+	enable-gpios = <&gpio1 1 0>;
+	status = "disabled";
+};
+
