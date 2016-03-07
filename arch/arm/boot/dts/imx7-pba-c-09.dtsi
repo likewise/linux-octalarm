@@ -45,15 +45,6 @@
 			enable-active-high;
 		};
 	};
-
-	gpio-bootcircuit {
-		compatible = "gpio-leds";
-		buffer-enable {
-			label = "Boot Circuit Buffer Enable GPIO";
-			gpios = <&gpio2 13 GPIO_ACTIVE_HIGH>;
-			default-state = "on";
-		};
-	};
 };
 
 &iomuxc {
@@ -71,7 +62,9 @@
 				MX7D_PAD_GPIO1_IO09__GPIO1_IO9 		0x59 /* ETH2 Int_N */
 				MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x59 /* ETH2 Reset_n */
 				MX7D_PAD_EPDC_DATA10__GPIO2_IO10	0x59 /* User Button */
-				MX7D_PAD_EPDC_DATA13__GPIO2_IO13 	0x59 /* Boot Circuit Buffer Enable */
+
+				MX7D_PAD_EPDC_DATA13__GPIO2_IO13	0x39 /* Boot Circuit Buffer Enable
+										5K pull-up  */
 			>;
 		};
 
