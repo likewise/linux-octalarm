@@ -58,7 +58,7 @@
 
 &iomuxc {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_hog_1 &pinctrl_hog_2>;
+	pinctrl-0 = <&pinctrl_hog_1 &pinctrl_hog_2 &pinctrl_hog_lcd>;
 
 	imx7d-phycore {
 		pinctrl_hog_2: hoggrp-2 {
@@ -114,7 +114,7 @@
 
 &iomuxc_lpsr {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_hog_2>;
+	pinctrl-0 = <&pinctrl_hog_lpsr_1 &pinctrl_hog_lpsr_lcd>;
 
 	imx7d-phycore {
 		pinctrl_hog_lpsr_1: hoggrp-lpsr_1 {
