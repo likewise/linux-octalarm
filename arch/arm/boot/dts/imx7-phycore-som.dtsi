@@ -139,6 +139,7 @@
 	imx7d-phycore {
 		pinctrl_hog_1: hoggrp-1 {
 			fsl,pins = <
+				MX7D_PAD_GPIO1_IO08__SD1_VSELECT	0x59 /* PMIC VSELECT */
 				MX7D_PAD_EPDC_BDR0__GPIO2_IO28		0x59 /* ENET1_RESET_B */
 				MX7D_PAD_EPDC_BDR1__GPIO2_IO29		0x59 /* ENET1_INT_B */
 			>;
