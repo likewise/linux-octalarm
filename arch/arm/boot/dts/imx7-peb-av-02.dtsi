@@ -7,9 +7,6 @@
  */
 
 / {
-	model = "Phytec AV-adapter GLYN Display Family";
-	compatible = "phytec,imx7-phycore-som", "phytec,imx7-pba-c-09";
-
 	backlight: backlight {
 		compatible = "pwm-backlight";
 		brightness-levels = <0 4 8 16 32 64 128 255>;

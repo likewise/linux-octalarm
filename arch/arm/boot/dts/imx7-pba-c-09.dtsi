@@ -7,7 +7,7 @@
  */
 
 / {
-	model = "Phytec i.MX7 phyBOARD";
+	model = "Phytec i.MX7 phyBOARD-Zeta";
 	compatible = "phytec,imx7-pba-c-09", "phytec,imx7-phycore-som", "fsl,imx7d";
 
 	regulators {

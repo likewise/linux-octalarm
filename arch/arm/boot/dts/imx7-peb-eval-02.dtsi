@@ -7,9 +7,6 @@
  */
 
 / {
-        model = "Phytec Evaluation Board for phyBOARD-Zeta";
-        compatible = "phytec,imx7-phycore-som", "phytec,imx7-pba-c-09";
-
 	phytec_leds: leds {
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
