@@ -3,7 +3,7 @@
 cd $WORKSPACE
 source /opt/fsl-imx-release/1.8/environment-setup-cortexa7hf-vfp-neon-poky-linux-gnueabi
 make distclean
-make imx_v7_defconfig
+make imx7_phyboard_zeta_defconfig
 make zImage
 make imx7-phyboard-rdk.dtb
 mkdir images
