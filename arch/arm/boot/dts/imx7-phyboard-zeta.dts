@@ -70,7 +70,7 @@
 	status = "okay";
 };
 
-/* PEB-AV-02: touch controller ft5406, LCD and PWM backlight control */
+/**** PEB-AV-02: touch controller ft5406, LCD and PWM backlight control ****/
 &i2c2 {
 	status = "okay";
 };
@@ -91,7 +91,7 @@
 	status = "okay";
 };
 
-/* Interfaces on PEB-EVAL-02 */
+/**** Interfaces on PEB-EVAL-02 ****/
 
 &i2c4 {
 	status = "okay";
