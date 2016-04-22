@@ -136,9 +136,8 @@
 &usdhc1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc1>;
-	cd-gpios = <&gpio5 0 0>;
+	cd-gpios = <&gpio5 0 GPIO_ACTIVE_LOW>;
 	no-1-8-v; /* Fixed voltage supply, doesn't support vsel */
-
 	enable-sdio-wakeup;
 	keep-power-in-suspend;
 	status = "disabled";
