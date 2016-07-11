@@ -182,6 +182,14 @@
 		interrupt-parent = <&gpio1>;
 		interrupts = <9 0>;
 		reg = <2>;
+		rxdv-skew-ps = <0>;
+		txen-skew-ps = <0>;
+		rxd0-skew-ps = <0>;
+		rxd1-skew-ps = <0>;
+		rxd2-skew-ps = <0>;
+		rxd3-skew-ps = <0>;
+		rxc-skew-ps = <1860>;
+		txc-skew-ps = <1860>;
 	};
 };
 
