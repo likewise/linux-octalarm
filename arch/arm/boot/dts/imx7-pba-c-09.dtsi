@@ -225,7 +225,7 @@
 	imx7d-phycore {
 		pinctrl_pwm4: pwm4grp {
 			fsl,pins = <
-				MX7D_PAD_GPIO1_IO00__PWM4_OUT		0x110b0
+				MX7D_PAD_GPIO1_IO00__PWM4_OUT		0x30
 			>;
 		};
 
