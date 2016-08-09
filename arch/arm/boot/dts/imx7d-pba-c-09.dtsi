@@ -8,7 +8,7 @@
 
 / {
 	model = "Phytec i.MX7 phyBOARD-Zeta";
-	compatible = "phytec,imx7-pba-c-09", "phytec,imx7-phycore-som", "fsl,imx7d";
+	compatible = "phytec,imx7d-pba-c-09", "phytec,imx7d-phycore-som", "fsl,imx7d";
 
 	regulators {
 		compatible = "simple-bus";
@@ -261,7 +261,7 @@
 	};
 };
 
-#include "imx7-peb-av-02.dtsi"
+#include "imx7d-peb-av-02.dtsi"
 
 &pwm4 {
 	pinctrl-names = "default";
