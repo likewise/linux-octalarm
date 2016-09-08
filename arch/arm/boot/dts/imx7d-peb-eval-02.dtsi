@@ -38,7 +38,7 @@
 	phytec_buttons: gpio-keys {
 		compatible = "gpio-keys";
 		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_btns_eval &pinctrl_btns_eval_lpsr>;
+		pinctrl-0 = <&pinctrl_btns_eval>;
 		status = "disabled";
 
 		userbtn@0 {
@@ -54,7 +54,7 @@
 
 		userbtn@2 {
 			label = "eval_button_3";
-			gpios = <&gpio1 3 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio5 2 GPIO_ACTIVE_HIGH>;
 			linux,code = <0x100>;	/* BTN_MISC */
 		};
 	};
@@ -81,6 +81,7 @@
 			fsl,pins = <
 				MX7D_PAD_EPDC_DATA09__GPIO2_IO9		0x79	/* Labeled UART6_TX on schematic */
 				MX7D_PAD_UART3_TX_DATA__GPIO4_IO5	0x79
+				MX7D_PAD_SD1_RESET_B__GPIO5_IO2		0x79	/* Labeled EXP_CONN_MUX3 on schematic */
 			>;
 		};
 
@@ -95,16 +96,6 @@
 			fsl,pins = <
 				MX7D_PAD_UART2_RX_DATA__UART2_DCE_RX	0x79
 				MX7D_PAD_UART2_TX_DATA__UART2_DCE_TX	0x79
-			>;
-		};
-	};
-};
-
-&iomuxc_lpsr {
-	imx7d-phycore {
-		pinctrl_btns_eval_lpsr: btns_eval_lpsrgrp {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO03__GPIO1_IO3		0x79	/* Labeled EXP_CONN_MUX3 on schematic */
 			>;
 		};
 	};

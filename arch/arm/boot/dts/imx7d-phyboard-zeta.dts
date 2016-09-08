@@ -70,6 +70,10 @@
 	status = "okay";
 };
 
+&wdog1 {
+	status = "okay";
+};
+
 /**** PEB-AV-02: touch controller ft5406, LCD and PWM backlight control ****/
 &i2c2 {
 	status = "okay";
@@ -83,7 +87,7 @@
 	status = "okay";
 };
 
-&pwm4 {
+&pwm3 {
 	status = "okay";
 };
 
