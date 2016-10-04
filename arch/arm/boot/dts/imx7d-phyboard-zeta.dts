@@ -53,7 +53,7 @@
 };
 
 &pcie {
-	status = "disabled";
+	status = "okay";
 };
 
 /* Host mode */

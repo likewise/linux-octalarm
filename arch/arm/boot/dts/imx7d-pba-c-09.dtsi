@@ -152,11 +152,7 @@
 
 &pcie {
 	pinctrl-names = "default";
-
-	/* Needed if J22 is set to 2+3
-	 * reset-gpio = <&gpio6 17  GPIO_ACTIVE_LOW>;
-	 */
-
+	reset-gpio = <&gpio6 17  GPIO_ACTIVE_LOW>;
 	disable-gpio = <&gpio5 1 GPIO_ACTIVE_LOW>;
 	status = "disabled";
 };
