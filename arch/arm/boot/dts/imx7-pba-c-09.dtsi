@@ -330,7 +330,17 @@
 				MX7D_PAD_SD2_DATA3__SD2_DATA3		0x59
 			>;
 		};
+
+		pinctrl_uart7: uart7grp {
+			fsl,pins = <
+				MX7D_PAD_ECSPI2_MOSI__UART7_DTE_RX	0x79
+				MX7D_PAD_ECSPI2_SCLK__UART7_DTE_TX	0x79
+				MX7D_PAD_ECSPI2_MISO__UART7_DTE_CTS	0x79
+				MX7D_PAD_ECSPI2_SS0__UART7_DTE_RTS	0x79
+			>;
+		};
 	};
+
 };
 
 &usdhc2 {
@@ -338,5 +348,13 @@
 	#size-cells = <0>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc2>;
+	status = "disabled";
+};
+
+&uart7 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart7>;
+	assigned-clocks = <&clks IMX7D_UART7_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
 	status = "disabled";
 };

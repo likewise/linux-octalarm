@@ -28,3 +28,9 @@
 	non-removable;
 	status = "okay";
 };
+
+&uart7 {
+	fsl,uart-has-rtscts;
+	fsl,dte-mode;
+	status = "okay";
+};
