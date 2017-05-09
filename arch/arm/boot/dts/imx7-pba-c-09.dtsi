@@ -272,7 +272,7 @@
 	};
 };
 
-#include "imx7d-peb-av-02.dtsi"
+#include "imx7-peb-av-02.dtsi"
 
 &pwm3 {
 	pinctrl-names = "default";
