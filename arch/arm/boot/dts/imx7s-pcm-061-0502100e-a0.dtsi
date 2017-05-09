@@ -1,0 +1,75 @@
+/*
+ * Copyright (C) 2017 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+
+&cpu1 {
+	status = "disabled";
+};
+
+/* No USB_OTG2 or ENET2 on i.MX7 Solo */
+&usbotg2 {
+        status = "disabled";
+};
+
+&fec2 {
+        status = "disabled";
+};
+
+/* eMMC not populated */
+&usdhc3 {
+        status = "disabled";
+};
+
+/* No PHY on SOM */
+&fec1 {
+        status = "disabled";
+};
+
+/* No SPI NOR */
+&qspi1 {
+        status = "disabled";
+};
+
+&serial_flash {
+        status = "disabled";
+};
+
+/* No PCIe external oscillator */
+&pcie {
+        status = "disabled";
+};
+
+/* No external RTC */
+&i2c_rtc {
+        status = "disabled";
+};
+
+/* NAND Configuration */
+&gpmi {
+	status = "okay";
+
+	partition@0 {
+		label = "NAND.boot";
+		reg = <0x0 0x4000000>;
+	};
+
+	partition@1 {
+		label = "NAND.kernel";
+		reg = <0x4000000 0x1000000>;
+	};
+
+	partition@2 {
+		label = "NAND.dtb";
+		reg = <0x5000000 0x1000000>;
+	};
+
+	partition@3 {
+		label = "NAND.rootfs";
+		reg = <0x6000000 0x0>;	/* To end of device */
+	};
+};
