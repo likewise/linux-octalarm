@@ -35,6 +35,14 @@
 			enable-active-high;
 		};
 
+		/* For display PEB-AV-02 */
+		backlight: backlight {
+			compatible = "pwm-backlight";
+			pwms = <&pwm3 0 5000000>;
+			enable-gpios = <&gpio1 1 0>;
+			status = "disabled";
+		};
+
 		/* Enable if R9 is populated. Conflicts with userbtn2 on PEB-EVAL-02 */
 		/*
 		reg_can1_3v3: regulator@2 {
@@ -273,17 +281,8 @@
 	};
 };
 
-#include "imx7-peb-av-02.dtsi"
-
 &pwm3 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pwm3>;
-	status = "disabled";
+	status = "okay";
 };
-
-&backlight {
-	pwms = <&pwm3 0 5000000>;
-	enable-gpios = <&gpio1 1 0>;
-	status = "disabled";
-};
-
