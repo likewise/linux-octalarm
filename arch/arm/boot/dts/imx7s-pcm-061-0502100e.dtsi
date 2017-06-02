@@ -6,6 +6,10 @@
  * published by the Free Software Foundation.
  */
 
+/ {
+	model = "Phytec phyCORE-i.MX7 Solo";
+	compatible = "phytec,imx7s-pcm-061-0502100e", "phytec,imx7-phycore-som", "fsl,imx7d";
+};
 
 &cpu1 {
 	status = "disabled";
@@ -13,11 +17,11 @@
 
 /* No USB_OTG2, ENET2, or PCIe on i.MX7 Solo */
 &usbotg2 {
-        status = "disabled";
+	status = "disabled";
 };
 
 &fec2 {
-        status = "disabled";
+	status = "disabled";
 };
 
 &pcie {
@@ -26,26 +30,26 @@
 
 /* eMMC not populated */
 &usdhc3 {
-        status = "disabled";
+	status = "disabled";
 };
 
 /* No PHY on SOM */
 &fec1 {
-        status = "disabled";
+	status = "disabled";
 };
 
 /* No SPI NOR */
 &qspi1 {
-        status = "disabled";
+	status = "disabled";
 };
 
 &serial_flash {
-        status = "disabled";
+	status = "disabled";
 };
 
 /* No external RTC */
 &i2c_rtc {
-        status = "disabled";
+	status = "disabled";
 };
 
 /* NAND Configuration */
