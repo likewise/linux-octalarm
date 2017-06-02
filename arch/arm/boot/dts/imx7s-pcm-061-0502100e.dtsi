@@ -11,13 +11,17 @@
 	status = "disabled";
 };
 
-/* No USB_OTG2 or ENET2 on i.MX7 Solo */
+/* No USB_OTG2, ENET2, or PCIe on i.MX7 Solo */
 &usbotg2 {
         status = "disabled";
 };
 
 &fec2 {
         status = "disabled";
+};
+
+&pcie {
+	status = "disabled";
 };
 
 /* eMMC not populated */
@@ -36,11 +40,6 @@
 };
 
 &serial_flash {
-        status = "disabled";
-};
-
-/* No PCIe external oscillator */
-&pcie {
         status = "disabled";
 };
 

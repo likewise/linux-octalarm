@@ -12,7 +12,7 @@
 		brightness-levels = <0 4 8 16 32 64 128 255>;
 		default-brightness-level = <6>;
 		power-supply = <&lcd_3v3>;
-		status = "disabled";
+		status = "okay";
 	};
 
 	lcd_3v3: fixedregulator-lcd {
@@ -72,7 +72,7 @@
 		&pinctrl_lcdif_ctrl>;
 	display = <&display0>;
 	lcd-supply = <&lcd_3v3>;
-	status = "disabled";
+	status = "okay";
 
 	display0: display {
 		bits-per-pixel = <32>;
@@ -102,5 +102,5 @@
 &ft5406 {
 	compatible = "edt,edt-ft5406", "edt,edt-ft5x06";
 	reg = <0x38>;
-	status = "disabled";
+	status = "okay";
 };

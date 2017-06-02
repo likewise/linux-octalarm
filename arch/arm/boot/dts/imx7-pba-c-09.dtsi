@@ -137,7 +137,7 @@
 	pinctrl-0 = <&pinctrl_uart5>;
 	assigned-clocks = <&clks IMX7D_UART5_ROOT_SRC>;
 	assigned-clock-parents = <&clks IMX7D_OSC_24M_CLK>;
-	status = "disabled";
+	status = "okay";
 };
 
 &usdhc1 {
@@ -147,14 +147,14 @@
 	no-1-8-v; /* Fixed voltage supply, doesn't support vsel */
 	enable-sdio-wakeup;
 	keep-power-in-suspend;
-	status = "disabled";
+	status = "okay";
 };
 
 &pcie {
 	pinctrl-names = "default";
 	reset-gpio = <&gpio6 17  GPIO_ACTIVE_LOW>;
 	disable-gpio = <&gpio5 1 GPIO_ACTIVE_LOW>;
-	status = "disabled";
+	status = "okay";
 };
 
 &flexcan1 {
@@ -163,7 +163,7 @@
 	/* Enable the following if SD1_RESET_B is used to enable/disable CAN xceiver
 	 *  xceiver-supply = <&reg_can1_3v3>;
 	 */
-	status = "disabled";
+	status = "okay";
 };
 
 &fec2 {
@@ -177,7 +177,7 @@
 	phy-handle = <&ethphy1>;
 	fsl,magic-packet;
 	phy-reset-gpios = <&gpio2 30 GPIO_ACTIVE_LOW>;
-	status = "disabled";
+	status = "okay";
 };
 
 /* same MDIO bus as PHY on phyCORE SOM */
@@ -201,18 +201,19 @@
 &usbotg1 {
 	vbus-supply = <&reg_usb_otg1_vbus>;
 	dr_mode = "host";
-	status = "disabled";
+	status = "okay";
 };
 
 &usbotg2 {
 	vbus-supply = <&reg_usb_otg2_vbus>;
-	status = "disabled";
+	status = "okay";
 };
 
 &wdog1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_wdog>;
 	fsl,wdog_b;
+	status = "okay";
 };
 
 /* DTS pinmuxing and bindings for LCD adapter PEB-AV-02 */
@@ -260,7 +261,7 @@
 	clock-frequency = <400000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c2>;
- 	status = "disabled";
+	status = "okay";
 
 	ft5406: ft5406@38 {
 		pinctrl-names = "default";

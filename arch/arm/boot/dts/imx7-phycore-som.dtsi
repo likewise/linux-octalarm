@@ -122,13 +122,13 @@
 		compatible = "atmel,24c32";
 		pagesize = <32>;
 		reg = <0x50>;
-		status = "disabled";
+		status = "okay";
 	};
 
 	i2c_rtc: rtc@68 {
 		compatible = "mc,rv4162";
 		reg=<0x68>;
-		status = "disabled";
+		status = "okay";
 	};
 };
 
@@ -268,7 +268,7 @@
 	phy-handle = <&ethphy0>;
 	fsl,magic-packet;
 	phy-reset-gpios = <&gpio2 28 GPIO_ACTIVE_LOW>;
-	status = "disabled";
+	status = "okay";
 
 	mdio: mdio {
 		#address-cells = <1>;
@@ -294,13 +294,13 @@
 	bus-width = <8>;
 	tuning-step = <2>;
 	non-removable;
-	status = "disabled";
+	status = "okay";
 };
 
 &qspi1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_qspi1_1>;
-	status = "disabled";
+	status = "okay";
 
 	serial_flash: n25q128a13@0 {
 		#address-cells = <1>;
@@ -309,7 +309,7 @@
 		reg = <0>;
 		spi-max-frequency = <27000000>; /* 108MHz/4 */
 		m25p,fast-read;
-		status = "disabled";
+		status = "okay";
 	};
 };
 
@@ -319,5 +319,5 @@
 	nand-on-flash-bbt;
 	#address-cells = <1>;
 	#size-cells = <1>;
-	status = "disabled";
+	status = "okay";
 };

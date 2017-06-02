@@ -11,7 +11,7 @@
 		compatible = "gpio-leds";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_leds_eval>;
-		status = "disabled";
+		status = "okay";
 
 		led@0 {
 			label = "eval_led_1";
@@ -39,7 +39,7 @@
 		compatible = "gpio-keys";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_btns_eval>;
-		status = "disabled";
+		status = "okay";
 
 		userbtn@0 {
 			label = "eval_button_1";
@@ -105,13 +105,13 @@
 	clock-frequency = <400000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c4>;
-	status = "disabled";
+	status = "okay";
 
 	i2c4_eeprom: eeprom@56 {
 		compatible = "onnn,24c32";
 		reg = <0x56>;
 		pagesize = <32>;
-		status = "disabled";
+		status = "okay";
 	}; 
 };
 
@@ -120,7 +120,7 @@
 	pinctrl-0 = <&pinctrl_uart1>;
 	assigned-clocks = <&clks IMX7D_UART1_ROOT_SRC>;
 	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
-	status = "disabled";
+	status = "okay";
 };
 
 &uart2 {
@@ -128,5 +128,5 @@
 	pinctrl-0 = <&pinctrl_uart2>;
 	assigned-clocks = <&clks IMX7D_UART2_ROOT_SRC>;
 	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
-	status = "disabled";
+	status = "okay";
 };
