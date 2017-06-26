@@ -9,6 +9,20 @@
 / {
 	model = "Phytec phyCORE-i.MX7 Solo";
 	compatible = "phytec,imx7s-pcm-061-0502100e", "phytec,imx7-phycore-som", "fsl,imx7d";
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		/* global autoconfigured region for contiguous allocations */
+		linux,cma {
+			compatible = "shared-dma-pool";
+			reusable;
+			size = <0xc000000>;
+			linux,cma-default;
+		};
+	};
 };
 
 &cpu1 {
