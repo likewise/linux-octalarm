@@ -22,6 +22,11 @@
 	arm-supply = <&sw1a_reg>;
 };
 
+&busfreq {
+	fsl,freq_scaling_disabled;
+};
+
+
 &i2c1 {
 	clock-frequency = <400000>;
 	pinctrl-names = "default";
