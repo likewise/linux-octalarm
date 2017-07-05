@@ -11,7 +11,7 @@
 
 / {
 	model = "Phytec phyCORE-i.MX7 Dual, Extended Temp";
-	compatible = "phytec,mx7d-pcm-061-2111111e", "phytec,imx7-phycore-som", "fsl,imx7d";
+	compatible = "phytec,imx7d-pcm-061-2111111e", "phytec,imx7-phycore-som", "fsl,imx7d";
 };
 
 /* No CAN on MCIMX7D3EVK10SC */

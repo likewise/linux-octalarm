@@ -8,7 +8,7 @@
 
 / {
 	model = "Phytec phyCORE-i.MX7 Dual";
-	compatible = "phytec,mx7d-pcm-061-2110111c", "phytec,imx7-phycore-som", "fsl,imx7d";
+	compatible = "phytec,imx7d-pcm-061-2110111c", "phytec,imx7-phycore-som", "fsl,imx7d";
 };
 
 /* NAND not populated */
