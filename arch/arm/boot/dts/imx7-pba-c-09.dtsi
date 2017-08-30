@@ -268,8 +268,8 @@
 
 		pinctrl_i2c2: i2c2grp {
 			fsl,pins = <
-				MX7D_PAD_I2C2_SCL__I2C2_SCL		0x4000007f
-				MX7D_PAD_I2C2_SDA__I2C2_SDA		0x4000007f
+				MX7D_PAD_I2C2_SCL__I2C2_SCL		0x4000007e
+				MX7D_PAD_I2C2_SDA__I2C2_SDA		0x4000007e
 			>;
 		};
 
