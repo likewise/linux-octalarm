@@ -22,3 +22,7 @@
 &flexcan2 {
 	status = "disabled";
 };
+
+&gpmi {
+	status = "disabled";
+};

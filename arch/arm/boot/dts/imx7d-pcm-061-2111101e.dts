@@ -1,0 +1,19 @@
+/*
+ * Copyright (C) 2017 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ *
+ * DTS for PHYTEC SOM PCM-061-2111101E and Carrier Board PBA-C-09.
+ */
+/dts-v1/;
+
+#include "imx7-phycore-som.dtsi"	/* Superset - includes all SOM population options */
+#include "imx7-pba-c-09.dtsi"		/* Carrier board */
+#include "imx7-peb-av-02.dtsi"		/* LCD adapter */
+#include "imx7-peb-eval-02.dtsi"	/* Evaluation module */
+#include "imx7-peb-wlbt-03.dtsi"	/* WiFi Module */
+
+#include "imx7d-pcm-061-2111101e.dtsi"	/* SOM variant */
