@@ -189,6 +189,7 @@
 	pinctrl-names = "default";
 	reset-gpio = <&gpio6 17  GPIO_ACTIVE_LOW>;
 	disable-gpio = <&gpio5 1 GPIO_ACTIVE_LOW>;
+	ext_osc = <0>; /* Using internal osc. Set to 1 for external osc */
 	status = "okay";
 };
 
