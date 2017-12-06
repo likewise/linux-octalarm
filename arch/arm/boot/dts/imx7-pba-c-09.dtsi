@@ -193,6 +193,10 @@
 	status = "okay";
 };
 
+&pcie_phy {
+	status = "okay";
+};
+
 &flexcan1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_flexcan1>;
@@ -248,7 +252,7 @@
 &wdog1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_wdog>;
-	fsl,wdog_b;
+	fsl,ext-reset-output;
 	status = "okay";
 };
 

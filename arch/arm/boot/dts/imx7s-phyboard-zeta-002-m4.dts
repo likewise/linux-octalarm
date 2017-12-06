@@ -54,7 +54,8 @@
 
 &rpmsg {
 	/* rpmsg vring stored at end of memory */
-	reg = <0x8fff0000 0x8000>;
+	vdev-nums = <1>;
+	reg = <0x8fff0000 0x10000>;
 	status = "okay";
 };
 
