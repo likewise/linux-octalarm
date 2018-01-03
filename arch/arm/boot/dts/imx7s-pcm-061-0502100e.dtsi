@@ -19,9 +19,13 @@
 		linux,cma {
 			compatible = "shared-dma-pool";
 			reusable;
-			size = <0xc000000>;
+			size = <0x4000000>;	/* 64MiB */
 			linux,cma-default;
 		};
+	};
+
+	memory {
+		reg = <0x80000000 0x10000000>;	/* 256MB */
 	};
 };
 
