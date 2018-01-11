@@ -11,8 +11,9 @@
 
 /dts-v1/;
 
+#include "imx7s.dtsi"			/* Solo Processor */
 #include "imx7-phycore-som.dtsi"	/* Superset - includes all SOM population options */
-#include "imx7-pba-c-09.dtsi"		/* Carrier board */
+#include "imx7s-pba-c-09.dtsi"		/* Carrier board */
 #include "imx7-peb-eval-02.dtsi"	/* Evaluation module */
 #include "imx7-peb-wlbt-03.dtsi"	/* WiFi Module */
 

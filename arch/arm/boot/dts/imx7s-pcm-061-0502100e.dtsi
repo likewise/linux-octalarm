@@ -29,27 +29,6 @@
 	};
 };
 
-&cpu1 {
-	status = "disabled";
-};
-
-/* No USB_OTG2, ENET2, or PCIe on i.MX7 Solo */
-&usbotg2 {
-	status = "disabled";
-};
-
-&fec2 {
-	status = "disabled";
-};
-
-&pcie {
-	status = "disabled";
-};
-
-&pcie_phy {
-	status = "disabled";
-};
-
 /* eMMC not populated */
 &usdhc3 {
 	status = "disabled";

@@ -7,11 +7,10 @@
  */
 
 #include <dt-bindings/input/input.h>
-#include "imx7d.dtsi"
 
 / {
 	model = "Phytec phyCORE-i.MX7";
-	compatible = "phytec,imx7-phycore-som", "fsl,imx7d";
+	compatible = "phytec,imx7-phycore-som", "fsl,imx7d", "fsl,imx7s";
 
 	memory {
 		reg = <0x80000000 0x80000000>;
