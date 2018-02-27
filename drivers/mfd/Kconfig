@@ -1672,5 +1672,12 @@ config MFD_VEXPRESS_SYSREG
 	  System Registers are the platform configuration block
 	  on the ARM Ltd. Versatile Express board.
 
+config MFD_PHYTEC_HAT
+	tristate "PHYTEC RPi HAT support"
+	select OF
+	select OF_OVERLAY
+	select OF_RESOLVE
+	default n
+
 endmenu
 endif
