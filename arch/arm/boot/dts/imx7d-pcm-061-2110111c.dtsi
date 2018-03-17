@@ -1,0 +1,17 @@
+/*
+ * Copyright (C) 2017 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+/ {
+	model = "Phytec phyCORE-i.MX7 Dual";
+	compatible = "phytec,imx7d-pcm-061-2110111c", "phytec,imx7-phycore-som", "fsl,imx7d";
+};
+
+/* NAND not populated */
+&gpmi {
+	status = "disabled";
+};

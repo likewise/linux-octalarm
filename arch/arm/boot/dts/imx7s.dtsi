@@ -47,6 +47,7 @@
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include "imx7d-pinfunc.h"
+#include "imx7d-pinfunc-lpsr.h"
 
 / {
 	#address-cells = <1>;
@@ -122,6 +123,12 @@
 		compatible = "simple-bus";
 		interrupt-parent = <&gpc>;
 		ranges;
+
+		ocram: sram@901000 {
+			compatible = "mmio-sram";
+			reg = <0x00901000 0x1f000>;
+			clocks = <&clks IMX7D_OCRAM_CLK>;
+		};
 
 		funnel@30041000 {
 			compatible = "arm,coresight-funnel", "arm,primecell";
@@ -407,6 +414,11 @@
 				interrupt-controller;
 				#interrupt-cells = <2>;
 				gpio-ranges = <&iomuxc 0 139 16>;
+			};
+
+			iomuxc_lpsr_gpr: lpsr-gpr@30270000 {
+				compatible = "fsl,imx7d-lpsr-gpr";
+				reg = <0x30270000 0x10000>;
 			};
 
 			wdog1: wdog@30280000 {
@@ -909,6 +921,11 @@
 				status = "disabled";
 			};
 
+			rpmsg: rpmsg{
+				compatible = "fsl,imx7d-rpmsg";
+				status = "disabled";
+			};
+
 			usbotg1: usb@30b10000 {
 				compatible = "fsl,imx7d-usb", "fsl,imx27-usb";
 				reg = <0x30b10000 0x200>;
@@ -990,6 +1007,19 @@
 					<&clks IMX7D_USDHC3_ROOT_CLK>;
 				clock-names = "ipg", "ahb", "per";
 				bus-width = <4>;
+				status = "disabled";
+			};
+
+			qspi1: qspi@30bb0000 {
+				#address-cells = <1>;
+				#size-cells = <0>;
+				compatible = "fsl,imx7d-qspi";
+				reg = <0x30bb0000 0x10000>, <0x60000000 0x10000000>;
+				reg-names = "QuadSPI", "QuadSPI-memory";
+				interrupts = <GIC_SPI 107 IRQ_TYPE_LEVEL_HIGH>;
+				clocks = <&clks IMX7D_QSPI_ROOT_CLK>,
+					<&clks IMX7D_QSPI_ROOT_CLK>;
+				clock-names = "qspi_en", "qspi";
 				status = "disabled";
 			};
 

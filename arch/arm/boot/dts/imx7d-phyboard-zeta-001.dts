@@ -1,0 +1,67 @@
+/*
+ * Copyright (C) 2015 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ *
+ * DTS for PHYTEC kit KPB-01910-001
+ *
+ * Adapted for prototyping at Adesys
+ */
+/dts-v1/;
+
+#include "imx7d.dtsi"			/* Dual Processor */
+#include "imx7-phycore-som.dtsi"	/* Superset - includes all SOM population options */
+#include "imx7d-pba-c-09.dtsi"		/* Carrier board with support for Dual processor */
+#include "imx7-peb-av-02.dtsi"		/* LCD adapter */
+#include "imx7-peb-eval-02.dtsi"	/* Evaluation module */
+
+// Not used by Adesys
+// #include "imx7-peb-wlbt-03.dtsi"	/* WiFi Module */
+
+#include "imx7d-pcm-061-2110111c.dtsi"	/* SOM variant */
+
+&iomuxc {
+
+    imx7d-phycore {
+
+        pinctrl_ecspi2: ecspi2grp {
+            fsl,pins = <
+                MX7D_PAD_ECSPI2_MISO__ECSPI2_MISO  0x2
+                MX7D_PAD_ECSPI2_MOSI__ECSPI2_MOSI  0x2
+                MX7D_PAD_ECSPI2_SCLK__ECSPI2_SCLK  0x2
+            >;
+        };
+
+        // @TODO: 0 chipselects seems unsupported - Leon
+        pinctrl_ecspi2_cs: ecspi2_cs_grp {
+            fsl,pins = <
+                MX7D_PAD_SD2_CD_B__GPIO5_IO9    0x80000000
+            >;
+        };
+
+    };
+};
+
+&ecspi2 {
+    // @TODO: 0 chipselects seems unsupported - Leon
+    fsl,spi-num-chipselects = <1>;
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_ecspi2 &pinctrl_ecspi2_cs>;
+    cs-gpios = <&gpio5 9 0>;
+    status = "okay";
+
+    spidev0: spi@0 {
+        reg = <0x00>;
+        compatible = "spidev";
+        // SPI CLK frequency 22.857.142 Hz
+        // 44 ns per bit, 352 ns per byte
+        // WS2812B 0 = 0xff 0x00 0x00
+        // WS2812B 1 = 0xff 0xff 0xff
+        spi-max-frequency = <22857142>;
+        status = "okay";
+    };
+};
+
