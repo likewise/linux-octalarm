@@ -65,3 +65,9 @@
     };
 };
 
+/* RTC is now used for U-Boot boot counter */
+&i2c_rtc {
+	status = "disabled";
+};
+
+
