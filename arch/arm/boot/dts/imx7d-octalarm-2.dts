@@ -1,0 +1,83 @@
+/*
+ * Copyright (C) 2015 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ *
+ * DTS for PHYTEC kit KPB-01910-001
+ *
+ * Adapted for prototyping at Adesys
+ * Development kit with YES display. Might be promoted to prototype dts
+ */
+/dts-v1/;
+
+#include "imx7d-octalarm-0.dts"			/* Dual Processor */
+#include "imx7-peb-av-02.dtsi"		/* LCD adapter */
+#include "imx7-peb-eval-02.dtsi"	/* Evaluation module */
+
+&display0 {
+        display-timings {
+                native-mode = <&timing0>;
+                // timing for Adesys / YES
+                timing0: KWH070KQ20F01 {
+                        clock-frequency = <33300000>;
+                        hactive = <800>;
+                        vactive = <480>;
+                        hfront-porch = <210>;
+                        hback-porch = <26>;
+                        hsync-len = <21>;
+                        vback-porch = <19>;
+                        vfront-porch = <210>;
+                        vsync-len = <6>;
+                        hsync-active = <0>;
+                        vsync-active = <0>;
+                        de-active = <1>;
+                        pixelclk-active = <1>;
+                };
+        };
+};
+/* spi-dev driver for WS2812b */
+&iomuxc {
+
+    imx7d-phycore {
+
+        pinctrl_ecspi2: ecspi2grp {
+            fsl,pins = <
+                MX7D_PAD_ECSPI2_MISO__ECSPI2_MISO  0x2
+                MX7D_PAD_ECSPI2_MOSI__ECSPI2_MOSI  0x2
+                MX7D_PAD_ECSPI2_SCLK__ECSPI2_SCLK  0x2
+            >;
+        };
+
+        // @TODO: 0 chipselects seems unsupported - Leon
+        pinctrl_ecspi2_cs: ecspi2_cs_grp {
+            fsl,pins = <
+                MX7D_PAD_SD2_CD_B__GPIO5_IO9    0x80000000
+            >;
+        };
+
+    };
+};
+
+&ecspi2 {
+    // @TODO: 0 chipselects seems unsupported - Leon
+    fsl,spi-num-chipselects = <1>;
+    pinctrl-names = "default";
+    pinctrl-0 = <&pinctrl_ecspi2 &pinctrl_ecspi2_cs>;
+    cs-gpios = <&gpio5 9 0>;
+    status = "okay";
+
+    spidev0: spi@0 {
+        reg = <0x00>;
+        compatible = "spidev";
+        // SPI CLK frequency 22.857.142 Hz
+        // 44 ns per bit, 352 ns per byte
+        // WS2812B 0 = 0xff 0x00 0x00
+        // WS2812B 1 = 0xff 0xff 0xff
+        spi-max-frequency = <22857142>;
+        status = "okay";
+    };
+};
+

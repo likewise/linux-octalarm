@@ -1,0 +1,39 @@
+/*
+ * Copyright (C) 2015 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ *
+ * DTS for PHYTEC kit KPB-01910-001
+ *
+ * Development kit with official touchscreen
+ */
+/dts-v1/;
+
+#include "imx7d-octalarm-0.dts"			/* Dual Processor */
+#include "imx7-peb-av-02.dtsi"		/* LCD adapter */
+#include "imx7-peb-eval-02.dtsi"	/* Evaluation module */
+
+&display0 {
+	display-timings {
+                native-mode = <&timing0>;
+                timing0: ETM0700G0DH6 {
+                        clock-frequency = <33000000>;
+                        hactive = <800>;
+                        vactive = <480>;
+                        hfront-porch = <40>;
+                        hback-porch = <216>;
+                        hsync-len = <128>;
+                        vback-porch = <35>;
+                        vfront-porch = <10>;
+                        vsync-len = <2>;
+                        hsync-active = <0>;
+                        vsync-active = <0>;
+                        de-active = <1>;
+                        pixelclk-active = <1>;
+                };
+        };
+};
+
