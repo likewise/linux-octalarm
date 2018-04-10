@@ -15,8 +15,6 @@
 #include "imx7d.dtsi"			/* Dual Processor */
 #include "imx7-phycore-som.dtsi"	/* Superset - includes all SOM population options */
 #include "imx7d-pba-c-09.dtsi"		/* Carrier board with support for Dual processor */
-
-
 #include "imx7d-pcm-061-2110111c.dtsi"	/* SOM variant */
 
 /* RTC is now used for U-Boot boot counter */
@@ -28,10 +26,3 @@
 &pcie {
         status = "disabled";
 };
-
-&pcie_phy {
-        status = "disabled";
-};
-
-
-
