@@ -16,6 +16,7 @@
 #include "imx7-phycore-som.dtsi"	/* Superset - includes all SOM population options */
 #include "imx7d-pba-c-09.dtsi"		/* Carrier board with support for Dual processor */
 #include "imx7d-pcm-061-2110111c.dtsi"	/* SOM variant */
+#include "imx7-peb-eval-02.dtsi"	/* Evaluation module */
 
 /* RTC is now used for U-Boot boot counter */
 &i2c_rtc {

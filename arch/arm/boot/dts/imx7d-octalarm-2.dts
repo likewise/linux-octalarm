@@ -15,13 +15,12 @@
 
 #include "imx7d-octalarm-0.dts"			/* Dual Processor */
 #include "imx7-peb-av-02.dtsi"		/* LCD adapter */
-#include "imx7-peb-eval-02.dtsi"	/* Evaluation module */
 
 &display0 {
         display-timings {
-                native-mode = <&timing0>;
+                native-mode = <&timing1>;
                 // timing for Adesys / YES
-                timing0: KWH070KQ20F01 {
+                timing1: KWH070KQ20F01 {
                         clock-frequency = <33300000>;
                         hactive = <800>;
                         vactive = <480>;
