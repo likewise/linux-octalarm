@@ -37,6 +37,11 @@
                 };
         };
 };
+
+&backlight {
+	pwms = <&pwm3 0 50000 0>;
+};
+
 /* spi-dev driver for WS2812b */
 &iomuxc {
 
