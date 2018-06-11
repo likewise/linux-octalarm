@@ -99,6 +99,13 @@ static const phytec_hat_known_hat phytec_hat_known_hats[] = {
 		"Skywriter HAT",
 		"skywriter_hat",
 	},
+	{
+		/* Adafruit Industries - 16-Channel PWM/Servo HAT - PCA9685 */
+		0x0000, 0x0000,
+		NULL,
+		"16-Channel PWM/Servo HAT - PCA9685",
+		NULL,
+	},
 };
 
 static const int phytec_hat_known_hats_num =
