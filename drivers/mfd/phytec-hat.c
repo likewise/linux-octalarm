@@ -113,6 +113,13 @@ static const phytec_hat_known_hat phytec_hat_known_hats[] = {
 		"Capacitive Touch HAT - MPR121",
 		NULL,
 	},
+	{
+		/* Adafruit Industries - Adafruit DC+Stepper Motor HAT */
+		0x0000, 0x0000,
+		NULL,
+		"Adafruit DC+Stepper Motor HAT",
+		NULL,
+	},
 };
 
 static const int phytec_hat_known_hats_num =
