@@ -9,18 +9,43 @@
  * DTS for PHYTEC kit KPB-01910-001
  *
  * Adapted for prototyping at Adesys
- * Development kit with YES display. Might be promoted to prototype dts
+ * Octalarm Prototype dts
  */
 /dts-v1/;
 
-#include "imx7d-octalarm-0.dts"			/* Dual Processor */
-#include "imx7-peb-av-02.dtsi"		/* LCD adapter */
+#include "imx7d.dtsi"			/* Dual Processor */
+#include "imx7-phycore-som.dtsi"	/* Superset - includes all SOM population options */
+//#include "imx7d-pba-c-09.dtsi"		/* Carrier board with support for Dual processor */
+#include "imx7s-pba-c-09.dtsi"
 
-&display0 {
-        display-timings {
-                native-mode = <&timing1>;
-                // timing for Adesys / YES
-                timing1: KWH070KQ20F01 {
+#include "imx7d-pcm-061-2110111c.dtsi"	/* SOM variant */
+
+/* RTC is now used for U-Boot boot counter */
+&i2c_rtc {
+	status = "disabled";
+};
+
+/* No PCIe used */
+&pcie {
+        status = "disabled";
+};
+
+&lcdif {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_lcdif_dat
+		&pinctrl_lcdif_ctrl>;
+	display = <&display0>;
+	lcd-supply = <&lcd_3v3>;
+	status = "okay";
+
+	display0: display {
+		bits-per-pixel = <32>;
+		bus-width = <24>;
+
+		display-timings {
+			native-mode = <&timing0>;
+			// timing for Adesys / YES
+			timing0: KWH070KQ20F01 {
                         clock-frequency = <33300000>;
                         hactive = <800>;
                         vactive = <480>;
@@ -34,13 +59,150 @@
                         vsync-active = <0>;
                         de-active = <1>;
                         pixelclk-active = <1>;
-                };
-        };
+			};
+		};
+	};
 };
 
 &backlight {
 	pwms = <&pwm3 0 50000 0>;
 };
+
+/ {
+	lcd_3v3: fixedregulator-lcd {
+		compatible = "regulator-fixed";
+		regulator-name = "lcd_3v3";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-boot-on;
+	};
+};
+
+&iomuxc {
+	imx7d-phycore {
+		pinctrl_hog_2: hoggrp-2 {
+			fsl,pins = <
+				MX7D_PAD_SD1_CD_B__GPIO5_IO0		0x59 /* SD1 CD */
+				MX7D_PAD_SD1_WP__GPIO5_IO1		0x59 /* PCIe Disable */
+				MX7D_PAD_SAI1_RX_BCLK__GPIO6_IO17	0x59 /* PCIe Reset */
+				MX7D_PAD_UART3_CTS_B__GPIO4_IO7		0x14 /* USB2 pwr */
+				MX7D_PAD_GPIO1_IO09__GPIO1_IO9 		0x59 /* ETH2 Int_N */
+				MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x59 /* ETH2 Reset_n */
+				MX7D_PAD_EPDC_DATA10__GPIO2_IO10	0x59 /* User Button */
+				MX7D_PAD_EPDC_DATA13__GPIO2_IO13	0x39 /* Boot Circuit Buffer Enable
+										5K pull-up  */
+			>;
+		};
+
+		pinctrl_uart1: uart1grp {
+			fsl,pins = <
+				MX7D_PAD_UART1_RX_DATA__UART1_DCE_RX	0x79
+				MX7D_PAD_UART1_TX_DATA__UART1_DCE_TX	0x79
+			>;
+		};
+
+		pinctrl_uart2: uart2grp {
+			fsl,pins = <
+				MX7D_PAD_UART2_RX_DATA__UART2_DCE_RX	0x79
+				MX7D_PAD_UART2_TX_DATA__UART2_DCE_TX	0x79
+			>;
+		};		
+
+		pinctrl_i2c3: i2c3grp {
+			fsl,pins = <
+				MX7D_PAD_I2C3_SDA__I2C3_SDA		0x4000007f
+				MX7D_PAD_I2C3_SCL__I2C3_SCL		0x4000007f
+			>;
+		};
+
+		pinctrl_lcdif_ctrl: lcdifctrlgrp {
+			fsl,pins = <
+				MX7D_PAD_LCD_CLK__LCD_CLK	0x7e
+				MX7D_PAD_LCD_ENABLE__LCD_ENABLE	0x7e
+				MX7D_PAD_LCD_HSYNC__LCD_HSYNC	0x7e
+				MX7D_PAD_LCD_VSYNC__LCD_VSYNC	0x7e
+			>;
+		};
+
+		pinctrl_lcdif_dat: lcdifdatgrp {
+			fsl,pins = <
+				MX7D_PAD_LCD_DATA00__LCD_DATA0	0x7e
+				MX7D_PAD_LCD_DATA01__LCD_DATA1	0x7e
+				MX7D_PAD_LCD_DATA02__LCD_DATA2	0x7e
+				MX7D_PAD_LCD_DATA03__LCD_DATA3	0x7e
+				MX7D_PAD_LCD_DATA04__LCD_DATA4	0x7e
+				MX7D_PAD_LCD_DATA05__LCD_DATA5	0x7e
+				MX7D_PAD_LCD_DATA06__LCD_DATA6	0x7e
+				MX7D_PAD_LCD_DATA07__LCD_DATA7	0x7e
+				MX7D_PAD_LCD_DATA08__LCD_DATA8	0x7e
+				MX7D_PAD_LCD_DATA09__LCD_DATA9	0x7e
+				MX7D_PAD_LCD_DATA10__LCD_DATA10	0x7e
+				MX7D_PAD_LCD_DATA11__LCD_DATA11	0x7e
+				MX7D_PAD_LCD_DATA12__LCD_DATA12	0x7e
+				MX7D_PAD_LCD_DATA13__LCD_DATA13	0x7e
+				MX7D_PAD_LCD_DATA14__LCD_DATA14	0x7e
+				MX7D_PAD_LCD_DATA15__LCD_DATA15	0x7e
+				MX7D_PAD_LCD_DATA16__LCD_DATA16	0x7e
+				MX7D_PAD_LCD_DATA17__LCD_DATA17	0x7e
+				MX7D_PAD_LCD_DATA18__LCD_DATA18	0x7e
+				MX7D_PAD_LCD_DATA19__LCD_DATA19	0x7e
+				MX7D_PAD_LCD_DATA20__LCD_DATA20	0x7e
+				MX7D_PAD_LCD_DATA21__LCD_DATA21	0x7e
+				MX7D_PAD_LCD_DATA22__LCD_DATA22	0x7e
+				MX7D_PAD_LCD_DATA23__LCD_DATA23	0x7e
+			>;
+		};
+	};
+};
+
+&backlight {
+	compatible = "pwm-backlight";
+		brightness-levels = <0 8 16 24 32 40 48 56 64 72 80 88 96 104
+			112 120 128 136 144 152 160 168 176 184 192 200 208 216 224
+			232 240 248 255>;  // Adesys
+		default-brightness-level = <32>; // Adesys
+	power-supply = <&lcd_3v3>;
+	status = "okay";
+};
+
+&i2c3 {
+	clock-frequency = <400000>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_i2c3>;
+	status = "okay";
+
+	gt911: gt911@5d {
+		compatible = "goodix,gt911";
+		reg = <0x5d>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_edt_ts_irq>;
+		interrupt-parent = <&gpio2>;
+		interrupts = <14 0>;
+		reset-gpios = <&gpio3 4 GPIO_ACTIVE_LOW>;
+		status = "okay";
+	};
+};
+
+&uart1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart1>;
+	assigned-clocks = <&clks IMX7D_UART1_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
+	status = "okay";
+};
+
+&uart2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart2>;
+	assigned-clocks = <&clks IMX7D_UART2_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
+	status = "okay";
+};
+
+&uart7 {
+	status = "okay";
+};
+
 
 /* spi-dev driver for WS2812b */
 &iomuxc {
@@ -80,7 +242,8 @@
         // 44 ns per bit, 352 ns per byte
         // WS2812B 0 = 0xff 0x00 0x00
         // WS2812B 1 = 0xff 0xff 0xff
-        spi-max-frequency = <22857142>;
+//        spi-max-frequency = <22857142>;
+        spi-max-frequency = <3000000>;
         status = "okay";
     };
 };
