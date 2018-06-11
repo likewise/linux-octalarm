@@ -165,6 +165,10 @@
 	status = "okay";
 };
 
+&i2c2 {
+	status = "disabled";
+};
+
 &i2c3 {
 	clock-frequency = <400000>;
 	pinctrl-names = "default";
