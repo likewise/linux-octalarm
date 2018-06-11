@@ -106,6 +106,13 @@ static const phytec_hat_known_hat phytec_hat_known_hats[] = {
 		"16-Channel PWM/Servo HAT - PCA9685",
 		NULL,
 	},
+	{
+		/* Adafruit Industries - Capacitive Touch HAT - MPR121 */
+		0x0000, 0x0000,
+		NULL,
+		"Capacitive Touch HAT - MPR121",
+		NULL,
+	},
 };
 
 static const int phytec_hat_known_hats_num =
