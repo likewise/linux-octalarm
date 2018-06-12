@@ -12,7 +12,7 @@
  */
 
 / {
-	model = "Phytec i.MX7S phyBOARD-Zeta Carrier Board";
+	model = "Adesys Octalarm 4500a Carrier Board for phytek imx7d module";
 	compatible = "phytec,imx7s-pba-c-09", "phytec,imx7-phycore-som", "fsl,imx7s";
 
 	regulators {
@@ -43,24 +43,6 @@
 			compatible = "pwm-backlight";
 			pwms = <&pwm3 0 50000 0>;
 			enable-gpios = <&gpio1 1 0>;
-			status = "disabled";
-		};
-
-		reg_wlan: regulator-wlan {
-			compatible = "regulator-fixed";
-			pinctrl-names = "default";
-			pinctrl-0 = <&pinctrl_wl_reg_on>;
-			regulator-name = "wlan";
-			gpio = <&gpio4 17 GPIO_ACTIVE_HIGH>;
-			status = "disabled";
-		};
-
-		reg_bt: regulator-bt {
-			compatible = "regulator-fixed";
-			pinctrl-names = "default";
-			pinctrl-0 = <&pinctrl_bt_reg_on>;
-			regulator-name = "bt";
-			gpio = <&gpio4 18 GPIO_ACTIVE_HIGH>;
 			status = "disabled";
 		};
 	};
@@ -221,18 +203,6 @@
 /* DTS pinmuxing and bindings for WiFi/BT adapter PEB-WLBT-03 */
 &iomuxc {
 	imx7d-phycore {
-		pinctrl_wl_reg_on: wl_reg_ongrp {
-			fsl,pins = <
-				MX7D_PAD_ECSPI1_MOSI__GPIO4_IO17	0x14
-			>;
-		};
-
-		pinctrl_bt_reg_on: bt_reg_ongrp {
-			fsl,pins = <
-				MX7D_PAD_ECSPI1_MISO__GPIO4_IO18	0x14
-			>;
-		};
-
 		pinctrl_usdhc2: usdhc2grp {
 			fsl,pins = <
 				MX7D_PAD_SD2_CMD__SD2_CMD		0x59
