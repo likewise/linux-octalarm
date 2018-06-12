@@ -76,8 +76,6 @@
 	imx7d-phycore {
 		pinctrl_hog_2: hoggrp-2 {
 			fsl,pins = <
-				MX7D_PAD_SD1_CD_B__GPIO5_IO0		0x59 /* SD1 CD */
-				MX7D_PAD_SD1_WP__GPIO5_IO1		0x59 /* PCIe Disable */
 				MX7D_PAD_SAI1_RX_BCLK__GPIO6_IO17	0x59 /* PCIe Reset */
 				MX7D_PAD_UART3_CTS_B__GPIO4_IO7		0x14 /* USB2 pwr */
 				MX7D_PAD_GPIO1_IO09__GPIO1_IO9 		0x59 /* ETH2 Int_N */
