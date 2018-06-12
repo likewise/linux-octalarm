@@ -86,27 +86,12 @@
 			>;
 		};
 
-		pinctrl_uart5: uart5grp {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79
-				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79
-			>;
-		};
-
 		pinctrl_wdog: wdoggrp {
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO00__WDOD1_WDOG_B	0x74
 			>;
 		};
 	};
-};
-
-&uart5 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_uart5>;
-	assigned-clocks = <&clks IMX7D_UART5_ROOT_SRC>;
-	assigned-clock-parents = <&clks IMX7D_OSC_24M_CLK>;
-	status = "okay";
 };
 
 &usdhc1 {
@@ -214,6 +199,27 @@
 			>;
 		};
 
+		pinctrl_uart1: uart1grp {
+			fsl,pins = <
+				MX7D_PAD_UART1_RX_DATA__UART1_DCE_RX	0x79
+				MX7D_PAD_UART1_TX_DATA__UART1_DCE_TX	0x79
+			>;
+		};
+
+		pinctrl_uart2: uart2grp {
+			fsl,pins = <
+				MX7D_PAD_UART2_RX_DATA__UART2_DCE_RX	0x79
+				MX7D_PAD_UART2_TX_DATA__UART2_DCE_TX	0x79
+			>;
+		};
+
+		pinctrl_uart5: uart5grp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79
+				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79
+			>;
+		};
+
 		pinctrl_uart7: uart7grp {
 			fsl,pins = <
 				MX7D_PAD_ECSPI2_MOSI__UART7_DTE_RX	0x79
@@ -232,6 +238,30 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc2>;
 	status = "disabled";
+};
+
+&uart1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart1>;
+	assigned-clocks = <&clks IMX7D_UART1_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
+	status = "okay";
+};
+
+&uart2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart2>;
+	assigned-clocks = <&clks IMX7D_UART2_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
+	status = "okay";
+};
+
+&uart5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart5>;
+	assigned-clocks = <&clks IMX7D_UART5_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_OSC_24M_CLK>;
+	status = "okay";
 };
 
 &uart7 {
