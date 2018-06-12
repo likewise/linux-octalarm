@@ -15,10 +15,9 @@
 
 #include "imx7d.dtsi"			/* Dual Processor */
 #include "imx7-phycore-som.dtsi"	/* Superset - includes all SOM population options */
-//#include "imx7d-pba-c-09.dtsi"		/* Carrier board with support for Dual processor */
-#include "imx7s-pba-c-09.dtsi"
-
 #include "imx7d-pcm-061-2110111c.dtsi"	/* SOM variant */
+
+#include "ads4500a.dtsi" /* Based on ims7-pba-c-09.dtsi */
 
 /* RTC is now used for U-Boot boot counter */
 &i2c_rtc {
@@ -106,7 +105,7 @@
 				MX7D_PAD_UART2_RX_DATA__UART2_DCE_RX	0x79
 				MX7D_PAD_UART2_TX_DATA__UART2_DCE_TX	0x79
 			>;
-		};		
+		};
 
 		pinctrl_i2c3: i2c3grp {
 			fsl,pins = <
