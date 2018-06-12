@@ -63,19 +63,6 @@
 			gpio = <&gpio4 18 GPIO_ACTIVE_HIGH>;
 			status = "disabled";
 		};
-
-		/* Enable if R9 is populated. Conflicts with userbtn2 on PEB-EVAL-02 */
-		/*
-		reg_can1_3v3: regulator@2 {
-			compatible = "regulator-fixed";
-			reg = <2>;
-			regulator-name = "can1-3v3";
-			regulator-min-microvolt = <3300000>;
-			regulator-max-microvolt = <3300000>;
-			gpio = <&gpio5 2 GPIO_ACTIVE_HIGH>;
-			enable-active-high;
-		};
-		*/
 	};
 };
 
@@ -101,13 +88,6 @@
 				MX7D_PAD_SD1_DATA1__SD1_DATA1		0x59
 				MX7D_PAD_SD1_DATA2__SD1_DATA2		0x59
 				MX7D_PAD_SD1_DATA3__SD1_DATA3		0x59
-			>;
-		};
-
-		pinctrl_flexcan1: flexcan1grp {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO12__FLEXCAN1_RX	0x5a
-				MX7D_PAD_GPIO1_IO13__FLEXCAN1_TX	0x5a
 			>;
 		};
 	};
@@ -154,15 +134,6 @@
 	no-1-8-v; /* Fixed voltage supply, doesn't support vsel */
 	enable-sdio-wakeup;
 	keep-power-in-suspend;
-	status = "okay";
-};
-
-&flexcan1 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_flexcan1>;
-	/* Enable the following if SD1_RESET_B is used to enable/disable CAN xceiver
-	 *  xceiver-supply = <&reg_can1_3v3>;
-	 */
 	status = "okay";
 };
 
