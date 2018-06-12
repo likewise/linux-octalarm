@@ -202,11 +202,6 @@
 	status = "okay";
 };
 
-&uart7 {
-	status = "okay";
-};
-
-
 /* spi-dev driver for WS2812b */
 &iomuxc {
 
