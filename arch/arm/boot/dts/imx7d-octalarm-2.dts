@@ -24,11 +24,6 @@
 	status = "disabled";
 };
 
-/* No PCIe used */
-&pcie {
-        status = "disabled";
-};
-
 &lcdif {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_lcdif_dat
@@ -148,10 +143,6 @@
 		default-brightness-level = <32>; // Adesys
 	power-supply = <&lcd_3v3>;
 	status = "okay";
-};
-
-&i2c2 {
-	status = "disabled";
 };
 
 &i2c3 {

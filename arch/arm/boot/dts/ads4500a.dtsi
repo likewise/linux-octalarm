@@ -132,13 +132,6 @@
 			>;
 		};
 
-		pinctrl_i2c2: i2c2grp {
-			fsl,pins = <
-				MX7D_PAD_I2C2_SCL__I2C2_SCL		0x4000007e
-				MX7D_PAD_I2C2_SDA__I2C2_SDA		0x4000007e
-			>;
-		};
-
 		pinctrl_edt_ts_irq: tsirqgrp {
 			fsl,pins = <
 				MX7D_PAD_EPDC_DATA14__GPIO2_IO14	0x59
@@ -164,19 +157,7 @@
 };
 
 &i2c2 {
-	clock-frequency = <400000>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_i2c2>;
-	status = "okay";
-
-	ft5406: ft5406@38 {
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_edt_ts_irq>;
-		interrupt-parent = <&gpio2>;
-		interrupts = <14 0>;
-		reset-gpios = <&gpio3 4 GPIO_ACTIVE_LOW>;
-		status = "disabled";
-	};
+	status = "disabled";
 };
 
 &pwm3 {
