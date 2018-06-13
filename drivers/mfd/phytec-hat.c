@@ -92,6 +92,13 @@ static const phytec_hat_known_hat phytec_hat_known_hats[] = {
 		"RabbitMax Flex",
 		"rabbitmax_flex",
 	},
+	{
+		/* Pimoroni Ltd. - Skywriter HAT */
+		0x0002, 0x0001,
+		NULL,
+		"Skywriter HAT",
+		"skywriter_hat",
+	},
 };
 
 static const int phytec_hat_known_hats_num =
