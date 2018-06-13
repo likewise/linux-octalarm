@@ -59,6 +59,12 @@
 				MX7D_PAD_SD1_WP__GPIO5_IO1			0x1D /* OUT2-OC, 100k pull-down, slow, x4 drive, hys */
 				MX7D_PAD_EPDC_DATA10__GPIO2_IO10	0x59 /* MDM-RI; Modem Ring indicator, 47k pull-up(@TODO) */
 				MX7D_PAD_EPDC_DATA13__GPIO2_IO13	0x39 /* BOOT-SEL; Boot Circuit Buffer Enable#, 5k pull-up, x4 drive, hys */
+				MX7D_PAD_SD2_CLK__GPIO5_IO12		0x1c /* SW-SWITCH; Software switch input, 100k pull-down, slow, x1, hys */
+				MX7D_PAD_SD2_CMD__GPIO5_IO13		0x1c /* SW-SHDWN; Software shutdown input, 100k pull-down, slow, x1, hys */
+				MX7D_PAD_SD2_DATA0__GPIO5_IO14		0x1c /* SW-PWROFF output, 100k pull-down, slow, x1, hys */
+				MX7D_PAD_SD2_DATA1__GPIO5_IO15		0x1c /* BOOT-OPT1; 100k pull-down, slow, x1, hys */
+				MX7D_PAD_SD2_DATA2__GPIO5_IO16		0x1c /* BOOT-OPT2; 100k pull-down, slow, x1, hys */
+				MX7D_PAD_SD2_DATA3__GPIO5_IO17		0x1c /* BOOT-OPT3; 100k pull-down, slow, x1, hys */
 			>;
 		};
 
@@ -95,7 +101,7 @@
 	imx7d-phycore {
 		pinctrl_hog_lpsr_1: hoggrp-lpsr_1 {
 			fsl,pins = <
-				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x14 /* USB1 pwr */
+				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x14 /* USB1 pwr @TODO fix for ADS4500A */
 			>;
 		};
 	};
@@ -106,6 +112,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c3>;
 	status = "okay";
+	/* @TODO add kernel supported slave devices on this bus as child nodes here */
 };
 
 &usdhc1 {
@@ -183,6 +190,8 @@
 /* DTS pinmuxing and bindings for WiFi/BT adapter PEB-WLBT-03 */
 &iomuxc {
 	imx7d-phycore {
+
+/* @TODO remove, these pins are not used for SD2 on ADS4500A
 		pinctrl_usdhc2: usdhc2grp {
 			fsl,pins = <
 				MX7D_PAD_SD2_CMD__SD2_CMD		0x59
@@ -193,7 +202,7 @@
 				MX7D_PAD_SD2_DATA3__SD2_DATA3		0x59
 			>;
 		};
-
+*/
 		pinctrl_uart1: uart1grp {
 			fsl,pins = <
 				MX7D_PAD_UART1_RX_DATA__UART1_DCE_RX	0x79
@@ -236,6 +245,7 @@
 
 };
 
+/* @TODO remove, these pins are not used for SD2 on ADS4500A
 &usdhc2 {
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -243,6 +253,7 @@
 	pinctrl-0 = <&pinctrl_usdhc2>;
 	status = "disabled";
 };
+*/
 
 &uart1 {
 	pinctrl-names = "default";
