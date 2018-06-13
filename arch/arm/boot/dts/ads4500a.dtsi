@@ -89,19 +89,6 @@
 			>;
 		};
 
-/* @TODO remove
-		pinctrl_usdhc1: usdhc1grp {
-			fsl,pins = <
-				MX7D_PAD_SD1_CMD__SD1_CMD		0x59
-				MX7D_PAD_SD1_CLK__SD1_CLK		0x19
-				MX7D_PAD_SD1_DATA0__SD1_DATA0		0x59
-				MX7D_PAD_SD1_DATA1__SD1_DATA1		0x59
-				MX7D_PAD_SD1_DATA2__SD1_DATA2		0x59
-				MX7D_PAD_SD1_DATA3__SD1_DATA3		0x59
-			>;
-		};
-*/
-
 		pinctrl_i2c3: i2c3grp {
 			fsl,pins = <
 				MX7D_PAD_I2C3_SDA__I2C3_SDA	0x4000007e /* @TODO find out where 0x4... is for... not in i.MX7DRM? */
@@ -138,18 +125,6 @@
 	status = "okay";
 	/* @TODO add kernel supported slave devices on this bus as child nodes here */
 };
-
-/* @TODO remove
-&usdhc1 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_usdhc1>;
-	cd-gpios = <&gpio5 0 GPIO_ACTIVE_LOW>;
-	no-1-8-v;
-	enable-sdio-wakeup;
-	keep-power-in-suspend;
-	status = "okay";
-};
-*/
 
 &usbotg1 {
 	vbus-supply = <&reg_usb_otg1_vbus>;
