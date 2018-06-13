@@ -102,7 +102,7 @@
 
 		pinctrl_wdog: wdoggrp {
 			fsl,pins = <
-				MX7D_PAD_GPIO1_IO00__WDOD1_WDOG_B	0x74
+				MX7D_PAD_GPIO1_IO00__WDOD1_WDOG_B	0x74 /* switch to WDOG_B function, with power-up default pad config: 100k pull-up, fast, hys, x1 */
 			>;
 		};
 	};
