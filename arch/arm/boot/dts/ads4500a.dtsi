@@ -217,18 +217,6 @@
 &iomuxc {
 	imx7d-phycore {
 
-/* @TODO remove, these pins are not used for SD2 on ADS4500A
-		pinctrl_usdhc2: usdhc2grp {
-			fsl,pins = <
-				MX7D_PAD_SD2_CMD__SD2_CMD		0x59
-				MX7D_PAD_SD2_CLK__SD2_CLK		0x19
-				MX7D_PAD_SD2_DATA0__SD2_DATA0		0x59
-				MX7D_PAD_SD2_DATA1__SD2_DATA1		0x59
-				MX7D_PAD_SD2_DATA2__SD2_DATA2		0x59
-				MX7D_PAD_SD2_DATA3__SD2_DATA3		0x59
-			>;
-		};
-*/
 		pinctrl_uart1: uart1grp {
 			fsl,pins = <
 				MX7D_PAD_UART1_RX_DATA__UART1_DCE_RX	0x79
@@ -280,16 +268,6 @@
 	};
 
 };
-
-/* @TODO remove, these pins are not used for SD2 on ADS4500A
-&usdhc2 {
-	#address-cells = <1>;
-	#size-cells = <0>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_usdhc2>;
-	status = "disabled";
-};
-*/
 
 &uart1 {
 	pinctrl-names = "default";
