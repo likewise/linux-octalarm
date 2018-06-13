@@ -86,11 +86,6 @@
 			>;
 		};
 
-		pinctrl_wdog: wdoggrp {
-			fsl,pins = <
-				MX7D_PAD_I2C2_SCL__WDOG3_WDOG_B	0x74 /* 100k pull-up, x1, fast, hys */
-			>;
-		};
 	};
 };
 
@@ -102,6 +97,12 @@
 		pinctrl_hog_lpsr_1: hoggrp-lpsr_1 {
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x14 /* USB1 pwr @TODO fix for ADS4500A */
+			>;
+		};
+
+		pinctrl_wdog: wdoggrp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO00__WDOD1_WDOG_B	0x74
 			>;
 		};
 	};
