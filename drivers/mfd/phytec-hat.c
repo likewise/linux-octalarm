@@ -79,6 +79,12 @@ static const phytec_hat_known_hat phytec_hat_known_hats[] = {
 		"Sense HAT",
 		"sense_hat",
 	},
+	{	/* Pimoroni Ltd - Unicorn HAT HD */
+		0x0012, 0x0001,
+		"imx7-peb-d-unicornhd.dtb",
+		"Unicorn HAT HD",
+		NULL,
+	},
 };
 
 static const int phytec_hat_known_hats_num =
