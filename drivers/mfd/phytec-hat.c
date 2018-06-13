@@ -85,6 +85,13 @@ static const phytec_hat_known_hat phytec_hat_known_hats[] = {
 		"Unicorn HAT HD",
 		NULL,
 	},
+	{
+		/* RabbitMax by Leon Anavi - RabbitMax Flex */
+		0x0001, 0x0001,
+		NULL,
+		"RabbitMax Flex",
+		"rabbitmax_flex",
+	},
 };
 
 static const int phytec_hat_known_hats_num =
