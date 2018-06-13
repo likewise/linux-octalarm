@@ -73,6 +73,12 @@ typedef struct
 } phytec_hat_known_hat;
 
 static const phytec_hat_known_hat phytec_hat_known_hats[] = {
+	{	/* Raspberry Pi - Sense HAT */
+		0x0001, 0x0001,
+		"imx7-peb-d-sense.dtb",
+		"Sense HAT",
+		"sense_hat",
+	},
 };
 
 static const int phytec_hat_known_hats_num =
