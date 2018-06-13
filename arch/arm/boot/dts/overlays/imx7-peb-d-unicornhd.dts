@@ -1,0 +1,33 @@
+/*
+ * Copyright (C) 2018 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+
+/ {
+	compatible = "phytec,imx7-phycore-som";
+
+	fragment@0 {
+		target = <&ecspi3>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			fsl,spi-num-chipselects = <1>;
+			cs-gpios = <&gpio6 22 GPIO_ACTIVE_LOW>;
+			status = "okay";
+
+			spidev0: spi@0 {
+				reg = <0>;
+				compatible = "rohm,dh2228fv";
+				spi-max-frequency = <9000000>;
+			};
+		};
+	};
+};
