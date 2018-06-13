@@ -109,6 +109,12 @@
 			>;
 		};
 
+		pinctrl_sense_hat: sense_hat {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO15__GPIO1_IO15		0x79
+			>;
+		};
+
 		pinctrl_ecspi1: ecspi1grp {
 			fsl,pins = <
 				MX7D_PAD_ECSPI1_MISO__ECSPI1_MISO	0x2
@@ -210,8 +216,9 @@
 	status = "okay";
 
 	rpi_hat_eeprom: eeprom@50 {
-		pinctrl-names = "default";
+		pinctrl-names = "default", "sense_hat";
 		pinctrl-0 = <&pinctrl_pebdrpi>;
+		pinctrl-1 = <&pinctrl_sense_hat>;
 		compatible = "phytec,phytec-hat";
 		reg = <0x50>;
 		read-only;
