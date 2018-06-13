@@ -71,6 +71,8 @@
 				MX7D_PAD_GPIO1_IO15__GPIO1_IO15		0x1c /* CH-EN input; 100k pull-down, slow, x1, hys */
 				MX7D_PAD_EPDC_DATA08__GPIO2_IO8		0x1c /* CH-TEST1 output; 100k pull-down, slow, x1, hys */
 				MX7D_PAD_EPDC_DATA09__GPIO2_IO9		0x1c /* CH-TEST2 output; 100k pull-down, slow, x1, hys */
+				MX7D_PAD_SAI1_RX_DATA__GPIO6_IO12	0x1c /* OWR-TX; 100k pull-down, slow, x1, hys @TODO */
+				MX7D_PAD_SAI1_TX_BCLK__GPIO6_IO13	0x1c /* OWR-RX; 100k pull-down, slow, x1, hys */
 			>;
 		};
 
@@ -228,6 +230,8 @@
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79
 				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79
+				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79
+				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* 100k pull-up, hys, x4 */
 			>;
 		};
 
