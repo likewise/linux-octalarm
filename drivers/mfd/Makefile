@@ -216,3 +216,4 @@ obj-$(CONFIG_MFD_MT6397)	+= mt6397-core.o
 
 obj-$(CONFIG_MFD_ALTERA_A10SR)	+= altera-a10sr.o
 obj-$(CONFIG_MFD_PHYTEC_HAT)	+= phytec-hat.o
+obj-$(CONFIG_MFD_RPISENSE_CORE)	+= rpisense-core.o

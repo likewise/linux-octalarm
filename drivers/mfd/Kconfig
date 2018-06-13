@@ -1679,5 +1679,13 @@ config MFD_PHYTEC_HAT
 	select OF_RESOLVE
 	default n
 
+config MFD_RPISENSE_CORE
+	tristate "Raspberry Pi Sense HAT core functions"
+	depends on I2C
+	select MFD_CORE
+	help
+	  This is the core driver for the Raspberry Pi Sense HAT. This provides
+	  the necessary functions to communicate with the hardware.
+
 endmenu
 endif
