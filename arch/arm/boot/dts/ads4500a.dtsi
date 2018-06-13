@@ -65,6 +65,12 @@
 				MX7D_PAD_SD2_DATA1__GPIO5_IO15		0x1c /* BOOT-OPT1; 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SD2_DATA2__GPIO5_IO16		0x1c /* BOOT-OPT2; 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SD2_DATA3__GPIO5_IO17		0x1c /* BOOT-OPT3; 100k pull-down, slow, x1, hys */
+				MX7D_PAD_GPIO1_IO12__GPIO1_IO12		0x1c /* CH-STAT1 input; 100k pull-down, slow, x1, hys */
+				MX7D_PAD_GPIO1_IO13__GPIO1_IO13		0x1c /* CH-STAT2 input; 100k pull-down, slow, x1, hys */
+				MX7D_PAD_GPIO1_IO14__GPIO1_IO14		0x1c /* CH-PG input; 100k pull-down, slow, x1, hys */
+				MX7D_PAD_GPIO1_IO15__GPIO1_IO15		0x1c /* CH-EN input; 100k pull-down, slow, x1, hys */
+				MX7D_PAD_EPDC_DATA08__GPIO2_IO8		0x1c /* CH-TEST1 output; 100k pull-down, slow, x1, hys */
+				MX7D_PAD_EPDC_DATA09__GPIO2_IO9		0x1c /* CH-TEST2 output; 100k pull-down, slow, x1, hys */
 			>;
 		};
 
