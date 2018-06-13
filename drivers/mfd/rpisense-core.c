@@ -80,12 +80,9 @@ static int rpisense_probe(struct i2c_client *i2c,
 	rpisense_js->keys_desc = devm_gpiod_get(&i2c->dev,
 						"keys-int", GPIOD_IN);
 	if (IS_ERR(rpisense_js->keys_desc)) {
-		dev_warn(&i2c->dev, "Failed to get keys-int descriptor.\n");
-		rpisense_js->keys_desc = gpio_to_desc(23);
-		if (rpisense_js->keys_desc == NULL) {
-			dev_err(&i2c->dev, "GPIO23 fallback failed.\n");
-			return PTR_ERR(rpisense_js->keys_desc);
-		}
+		dev_err(&i2c->dev, "Failed to get keys-int descriptor.\n");
+
+		return PTR_ERR(rpisense_js->keys_desc);
 	}
 	rpisense_client_dev_register(rpisense, "rpi-sense-js",
 				     &(rpisense->joystick.pdev));
