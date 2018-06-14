@@ -13,9 +13,7 @@
  */
 /dts-v1/;
 
-#include "imx7d.dtsi"			/* Dual Processor */
-#include "imx7-phycore-som.dtsi"	/* Superset - includes all SOM population options */
-#include "imx7d-pcm-061-2110111c.dtsi"	/* SOM variant */
+#include "ads-phytek-imx7d-pcm61.dtsi"  /* SOM variant as used by Adesys */
 
 #include "ads4500a.dtsi" /* Based on ims7-pba-c-09.dtsi */
 
