@@ -284,7 +284,7 @@
 
     spidev0: spi@0 {
         reg = <0x00>;
-        compatible = "spidev";
+        compatible = "ws2812b";
         // SPI CLK frequency 22.857.142 Hz
         // 44 ns per bit, 352 ns per byte
         // WS2812B 0 = 0xff 0x00 0x00
