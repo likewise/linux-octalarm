@@ -343,6 +343,11 @@ dtbs: prepare scripts
 dtbs_install:
 	$(Q)$(MAKE) $(dtbinst)=$(boot)/dts
 
+dtbs_overlays: prepare scripts
+	$(Q)$(MAKE) $(build)=$(boot)/dts/overlays
+
+PHONY += dtbs_overlays
+
 PHONY += vdso_install
 vdso_install:
 ifeq ($(CONFIG_VDSO),y)
