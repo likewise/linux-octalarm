@@ -13,7 +13,7 @@
 
 / {
 	model = "Adesys Octalarm 4500a Carrier Board for phytek imx7d module";
-	compatible = "adesys,ads4500a", "phytec,imx7-phycore-som", "fsl,imx7s";
+	compatible = "adesys,ads4500a", "phytec,imx7-phycore-som", "fsl,imx7d";
 
 	regulators {
 		compatible = "simple-bus";
@@ -168,8 +168,8 @@
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79
 				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79
-				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79
-				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* 100k pull-up, hys, x4 */
+//				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79
+//				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* 100k pull-up, hys, x4 */
 			>;
 		};
 
@@ -280,7 +280,9 @@
 &ecspi3 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_ecspi3>;
-    status = "okay";
+	status = "okay";
+	dmas = <&sdma 14 7 1>, <&sdma 15 7 2>;
+	dma-names = "rx", "tx";
 
     spidev0: spi@0 {
         reg = <0x00>;
