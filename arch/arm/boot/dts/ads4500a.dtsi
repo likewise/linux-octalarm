@@ -43,12 +43,10 @@
 			regulator-max-microvolt = <1800000>;
 		};
 
-		/* For display PEB-AV-02 */
+		/* For display backlight */
 		backlight: backlight {
 			compatible = "pwm-backlight";
 			pwms = <&pwm3 0 50000 0>;
-			enable-gpios = <&gpio1 1 0>;
-			status = "disabled";
 		};
 	};
 };
@@ -108,15 +106,7 @@
 
 &iomuxc_lpsr {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_hog_lpsr_1>;
-
 	imx7d-phycore {
-		pinctrl_hog_lpsr_1: hoggrp-lpsr_1 {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x14 /* USB1 pwr @TODO fix for ADS4500A */
-			>;
-		};
-
 		pinctrl_wdog: wdoggrp {
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO00__WDOD1_WDOG_B	0x74 /* switch to WDOG_B function, with power-up default pad config: 100k pull-up, fast, hys, x1 */
@@ -171,10 +161,10 @@
 	imx7d-phycore {
 		pinctrl_uart5: uart5grp {
 			fsl,pins = <
-				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79
-				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79
-				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79
-				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* 100k pull-up, hys, x4 */
+				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79 /* UART-RX */
+				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79 /* UART-TX */
+				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79 /* UART-CTS */
+				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* UART-RTS, 100k pull-up, hys, x4 */
 			>;
 		};
 
