@@ -1,13 +1,10 @@
 /*
- * Copyright (C) 2015 PHYTEC America, LLC
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  *
- *
- * This file configures the interfaces supported by imx7 Solo on carrier
- * board PBA-C-09.
+ * This file configures the interfaces supported by imx7 Dual
+ * on Adesys ADS4500A
  *
  */
 
@@ -26,7 +23,15 @@
 			regulator-name = "usb_otg1_vbus";
 			regulator-min-microvolt = <5000000>;
 			regulator-max-microvolt = <5000000>;
-			gpio = <&gpio1 5 GPIO_ACTIVE_HIGH>;
+		};
+
+		reg_usb_otg2_vbus: regulator@1 {
+			compatible = "regulator-fixed";
+			reg = <1>;
+			regulator-name = "usb_otg2_vbus";
+			regulator-min-microvolt = <5000000>;
+			regulator-max-microvolt = <5000000>;
+			gpio = <&gpio5 2 GPIO_ACTIVE_HIGH>;
 			enable-active-high;
 		};
 
@@ -103,7 +108,7 @@
 
 &iomuxc_lpsr {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_hog_lpsr_1 &pinctrl_hog_lpsr_lcd>;
+	pinctrl-0 = <&pinctrl_hog_lpsr_1>;
 
 	imx7d-phycore {
 		pinctrl_hog_lpsr_1: hoggrp-lpsr_1 {
@@ -146,19 +151,17 @@
 	status = "okay";
 };
 
-/* DTS pinmuxing and bindings for LCD adapter PEB-AV-02 */
-
 &iomuxc {
 	imx7d-phycore {
 		pinctrl_hog_lcd: hog_lcdgrp {
 			fsl,pins = <
-				MX7D_PAD_LCD_RESET__GPIO3_IO4		0x79
+				MX7D_PAD_LCD_RESET__GPIO3_IO4		0x79 /* DIS-RST */
 			>;
 		};
 
 		pinctrl_edt_ts_irq: tsirqgrp {
 			fsl,pins = <
-				MX7D_PAD_EPDC_DATA14__GPIO2_IO14	0x59
+				MX7D_PAD_ENET1_TX_CLK__GPIO7_IO12	0x59 /* TOUCH-INT */
 			>;
 		};
 	};
@@ -178,12 +181,6 @@
 		pinctrl_pwm3: pwmgrp {
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO03__PWM3_OUT		0x30
-			>;
-		};
-
-		pinctrl_hog_lpsr_lcd: hoggrp_lpsr_lcd {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO01__GPIO1_IO1		0x59
 			>;
 		};
 	};

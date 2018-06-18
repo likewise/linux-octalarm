@@ -72,25 +72,6 @@
 
 &iomuxc {
 	imx7d-phycore {
-		pinctrl_hog_2: hoggrp-2 {
-			fsl,pins = <
-				MX7D_PAD_SAI1_RX_BCLK__GPIO6_IO17	0x59 /* PCIe Reset */
-				MX7D_PAD_UART3_CTS_B__GPIO4_IO7		0x14 /* USB2 pwr */
-				MX7D_PAD_GPIO1_IO09__GPIO1_IO9 		0x59 /* ETH2 Int_N */
-				MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x59 /* ETH2 Reset_n */
-				MX7D_PAD_EPDC_DATA10__GPIO2_IO10	0x59 /* User Button */
-				MX7D_PAD_EPDC_DATA13__GPIO2_IO13	0x39 /* Boot Circuit Buffer Enable
-										5K pull-up  */
-			>;
-		};
-
-		pinctrl_i2c3: i2c3grp {
-			fsl,pins = <
-				MX7D_PAD_I2C3_SDA__I2C3_SDA		0x4000007f
-				MX7D_PAD_I2C3_SCL__I2C3_SCL		0x4000007f
-			>;
-		};
-
 		pinctrl_lcdif_ctrl: lcdifctrlgrp {
 			fsl,pins = <
 				MX7D_PAD_LCD_CLK__LCD_CLK	0x7e
