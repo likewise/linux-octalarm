@@ -86,6 +86,8 @@
 				MX7D_PAD_SAI1_MCLK__GPIO6_IO18		0x1c /* OUT1-OC; 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SD2_CD_B__GPIO5_IO9		0x1c /* OUT2-OC; 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SD2_WP__GPIO5_IO10			0x59 /* NCF-IRQ;  47k pull-up(@TODO) */
+				MX7D_PAD_SAI2_RX_DATA__GPIO6_IO21	0x1c /* GSM-RST */
+				MX7D_PAD_SD1_RESET_B__GPIO5_IO2 	0x1c /* USB-PWR */
 			>;
 		};
 
