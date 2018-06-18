@@ -281,8 +281,8 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_ecspi3>;
 	status = "okay";
-	dmas = <&sdma 14 7 1>, <&sdma 15 7 2>;
-	dma-names = "rx", "tx";
+//	dmas = <&sdma 14 7 0>, <&sdma 15 7 0>;
+//	dma-names = "rx", "tx";
 
     spidev0: spi@0 {
         reg = <0x00>;
