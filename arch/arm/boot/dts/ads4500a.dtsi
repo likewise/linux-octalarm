@@ -51,6 +51,15 @@
 	};
 };
 
+&gpio1 {
+	line_gpio1_io5 {
+		gpio-hog;
+		gpios = <5 0>;
+		output-low;
+		line-name = "gpio-gsm-forceoff";
+	};
+};
+
 &iomuxc {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hog_1 &pinctrl_hog_2 &pinctrl_hog_lcd>;
@@ -90,7 +99,14 @@
 				MX7D_PAD_SD2_CD_B__GPIO5_IO9		0x1c /* OUT2-OC; 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SD2_WP__GPIO5_IO10			0x59 /* NCF-IRQ;  47k pull-up(@TODO) */
 				MX7D_PAD_SAI2_RX_DATA__GPIO6_IO21	0x1c /* GSM-RST */
-				MX7D_PAD_SD1_RESET_B__GPIO5_IO2 	0x1c /* USB-PWR */
+				MX7D_PAD_SD1_RESET_B__GPIO5_IO2 	0x1c /* USB-PWR for USB2, disable by default, 100k pull-down */
+				MX7D_PAD_UART3_RTS_B__GPIO4_IO6		0x1c /* RS485-PWR, disable by default, 100k pull-down */
+				MX7D_PAD_GPIO1_IO01__GPIO1_IO1		0x1c /* SPK-SDZ, active low shutdown, 100k pull-down */
+				MX7D_PAD_SAI2_TX_SYNC__GPIO6_IO19	0x0c /* SPK-FAULT, open-drain, no PD/PU: (10k external pull-up) */
+				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x1c /* GSM-FORCEOFF */
+
+				MX7D_PAD_ENET1_CRS__SAI1_TX_SYNC 	0x1c /* SPK-LRCLK */
+				MX7D_PAD_ENET1_COL__SAI1_TX_DATA0 	0x1c /* SPK-SDIN */
 			>;
 		};
 
