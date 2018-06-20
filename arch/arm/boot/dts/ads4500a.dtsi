@@ -80,7 +80,7 @@
 				MX7D_PAD_GPIO1_IO09__GPIO1_IO9		0x59 /* OUT4_REL, 47k pull-up(@TODO) */
 				MX7D_PAD_EPDC_DATA13__GPIO2_IO13	0x39 /* BOOT-SEL; Boot Circuit Buffer Enable#, 5k pull-up (!), x4 drive, hys */
 				MX7D_PAD_EPDC_DATA14__GPIO2_IO14	0x59 /* DIS-AVDD-GD, 47k pull-up(@TODO) */
-				MX7D_PAD_EPDC_DATA15__GPIO2_IO15	0x59 /* DIS-FORCEOFF, 47k pull-up(@TODO) */
+				MX7D_PAD_EPDC_DATA15__GPIO2_IO15	0x1c /* DIS-FORCEOFF, 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SD2_CLK__GPIO5_IO12		0x1c /* SW-SWITCH; Software switch input, 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SD2_CMD__GPIO5_IO13		0x1c /* SW-SHDWN; Software shutdown input, 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SD2_DATA0__GPIO5_IO14		0x1c /* SW-PWROFF output, 100k pull-down, slow, x1, hys */
