@@ -243,6 +243,15 @@
 			>;
 		};
 
+		pinctrl_ecspi1: ecspi1grp {
+			fsl,pins = <
+				MX7D_PAD_ECSPI1_MISO__ECSPI1_MISO	0x2
+				MX7D_PAD_ECSPI1_MOSI__ECSPI1_MOSI	0x2
+				MX7D_PAD_ECSPI1_SCLK__ECSPI1_SCLK	0x2
+				MX7D_PAD_ECSPI1_SS0__ECSPI1_SS0		0x59
+			>;
+		};
+
 		pinctrl_ecspi3: ecspi3grp {
 			fsl,pins = <
 //				MX7D_PAD_SAI2_TX_SYNC__ECSPI3_MISO	0x2
@@ -285,6 +294,18 @@
 	assigned-clocks = <&clks IMX7D_UART7_ROOT_SRC>;
 	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
 	status = "okay";
+};
+/* MCP3008 for 8 channel ADC */
+&ecspi1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_ecspi1>;
+	status = "okay";
+	mcp3x0x@0 {
+		reg = <0>;
+		compatible = "microchip,mcp3008";
+		spi-max-frequency = <1000000>;
+		vref-supply = <&vref_reg>;
+	};
 };
 
 /* spi-dev driver for WS2812b */
