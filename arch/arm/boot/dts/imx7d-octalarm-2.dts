@@ -27,7 +27,7 @@
 	pinctrl-0 = <&pinctrl_lcdif_dat
 		&pinctrl_lcdif_ctrl>;
 	display = <&display0>;
-	lcd-supply = <&lcd_3v3>;
+	lcd-supply = <&reg_3v3>;
 	status = "okay";
 
 	display0: display {
@@ -58,16 +58,6 @@
 
 &backlight {
 	pwms = <&pwm3 0 50000 0>;
-};
-
-/ {
-	lcd_3v3: fixedregulator-lcd {
-		compatible = "regulator-fixed";
-		regulator-name = "lcd_3v3";
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-		regulator-boot-on;
-	};
 };
 
 &iomuxc {
@@ -118,7 +108,7 @@
 			112 120 128 136 144 152 160 168 176 184 192 200 208 216 224
 			232 240 248 255>;  // Adesys
 		default-brightness-level = <32>; // Adesys
-	power-supply = <&lcd_3v3>;
+	power-supply = <&reg_3v3>;
 	status = "okay";
 };
 

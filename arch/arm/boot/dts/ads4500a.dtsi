@@ -43,6 +43,25 @@
 			regulator-max-microvolt = <1800000>;
 		};
 
+		reg_vsys: fixedregulator@3 {
+			compatible = "regulator-fixed";
+			reg = <3>;
+			regulator-name = "reg_vsys";
+			regulator-min-microvolt = <12000000>;
+			regulator-max-microvolt = <12000000>;
+			regulator-boot-on;
+		};
+
+		reg_3v3: fixedregulator@4 {
+			compatible = "regulator-fixed";
+			reg = <4>;
+			vin-supply = <&reg_vsys>;
+			regulator-name = "reg_3v3";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			regulator-boot-on;
+		};
+
 		/* For display backlight */
 		backlight: backlight {
 			compatible = "pwm-backlight";
@@ -137,7 +156,6 @@
 	pinctrl-0 = <&pinctrl_i2c3>;
 	status = "okay";
 
-	/* @TODO add kernel supported slave devices on this bus as child nodes here */
 	lm75@48 {
 			compatible = "lm75";
 			reg = <0x48>;
@@ -147,6 +165,12 @@
 			compatible = "lm75";
 			reg = <0x49>;
 			status = "okay";
+	};
+	tas5720: tas5720@6c {
+		compatible = "ti,tas5720";
+		reg = <0x6c>;
+		dvdd-supply = <&reg_3v3>;
+		pvdd-supply = <&reg_vsys>;
 	};
 };
 
