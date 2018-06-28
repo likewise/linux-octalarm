@@ -90,6 +90,14 @@
 			>;
 		};
 
+		pinctrl_rabbitmaxflex: rabbitmaxflex {
+			fsl,pins = <
+				MX7D_PAD_SAI2_TX_BCLK__GPIO6_IO20	0x19
+				MX7D_PAD_SAI2_TX_SYNC__GPIO6_IO19	0x19
+				MX7D_PAD_SAI2_RX_DATA__GPIO6_IO21	0x79
+			>;
+		};
+
 		pinctrl_sai2: sai2grp {
 			fsl,pins = <
 				MX7D_PAD_SD2_DATA0__SAI2_RX_DATA0	0x1f	/* Labeled X_SD2_DATA0 on schematic */
@@ -216,9 +224,11 @@
 	status = "okay";
 
 	rpi_hat_eeprom: eeprom@50 {
-		pinctrl-names = "default", "sense_hat";
+		pinctrl-names = "default", "sense_hat", "rabbitmax_flex";
 		pinctrl-0 = <&pinctrl_pebdrpi>;
 		pinctrl-1 = <&pinctrl_sense_hat>;
+		pinctrl-2 = <&pinctrl_pebdrpi &pinctrl_rabbitmaxflex
+			     &pinctrl_pwm2_gpio &pinctrl_ecspi1_gpio>;
 		compatible = "phytec,phytec-hat";
 		reg = <0x50>;
 		read-only;
