@@ -71,6 +71,18 @@
 };
 
 &gpio1 {
+	/*
+	 * Legend:
+	 * "NC" = not connected (no rail from the SoC)
+	 * "[FOO]" = pin is muxed for peripheral FOO (not GPIO)
+	 * "" = No idea
+	 * "FOO" = GPIO line named "FOO" on the schematic
+	 * "FOO_N" = GPIO line named "FOO" on schematic, active low
+	 */
+	gpio-line-names = "[GPIO1-IO00]", "SPK-SDZ"/*IO1*/, "[GPIO1-IO02]", "[GPIO1-IO03]", "RS485-RE", "GSM-FORCEOFF", "[GPIO1-IO06]", "[GPIO1-IO07]",
+					  "[GPIO1-IO08]", "[GPIO1-IO09]", "[GPIO1-IO10]", "[GPIO1-IO11]", "[GPIO1-IO12]", "[GPIO1-IO13]", "[GPIO1-IO14]", "[GPIO1-IO15]",
+					  "[GPIO1-IO16]", "[GPIO1-IO17]", "[GPIO1-IO18]", "[GPIO1-IO19]", "[GPIO1-IO20]", "[GPIO1-IO21]", "[GPIO1-IO22]", "[GPIO1-IO23]",
+					  "[GPIO1-IO24]", "[GPIO1-IO25]", "[GPIO1-IO26]", "[GPIO1-IO27]", "[GPIO1-IO28]", "[GPIO1-IO29]", "[GPIO1-IO30]", "[GPIO1-IO31]";
 	line_gpio1_io5 {
 		gpio-hog;
 		gpios = <5 0>;
@@ -198,41 +210,6 @@
 	status = "okay";
 };
 
-&iomuxc {
-	imx7d-phycore {
-		pinctrl_hog_lcd: hog_lcdgrp {
-			fsl,pins = <
-				MX7D_PAD_LCD_RESET__GPIO3_IO4		0x79 /* DIS-RST */
-			>;
-		};
-
-		pinctrl_edt_ts_irq: tsirqgrp {
-			fsl,pins = <
-				MX7D_PAD_ENET1_TX_CLK__GPIO7_IO12	0x59 /* TOUCH-INT */
-			>;
-		};
-	};
-};
-
-&iomuxc_lpsr {
-	imx7d-phycore {
-		pinctrl_uart5: uart5grp {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79 /* UART-RX */
-				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79 /* UART-TX */
-//				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79 /* UART-CTS */
-//				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* UART-RTS, 100k pull-up, hys, x4 */
-			>;
-		};
-
-		pinctrl_pwm3: pwmgrp {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO03__PWM3_OUT		0x30 /* PWM3 */
-			>;
-		};
-	};
-};
-
 &i2c2 {
 	status = "disabled";
 };
@@ -243,7 +220,6 @@
 	status = "okay";
 };
 
-/* DTS pinmuxing and bindings for WiFi/BT adapter PEB-WLBT-03 */
 &iomuxc {
 	imx7d-phycore {
 
@@ -261,11 +237,19 @@
 			>;
 		};
 
-		/* @TODO maybe move over to Cortex-M4 later */
 		pinctrl_uart3: uart3grp {
 			fsl,pins = <
 				MX7D_PAD_UART3_RX_DATA__UART3_DCE_RX	0x79
 				MX7D_PAD_UART3_TX_DATA__UART3_DCE_TX	0x79
+			>;
+		};
+
+		pinctrl_uart5: uart5grp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79 /* UART-RX */
+				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79 /* UART-TX */
+				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79 /* UART-CTS */
+				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* UART-RTS, 100k pull-up, hys, x4 */
 			>;
 		};
 
@@ -295,6 +279,23 @@
 //				MX7D_PAD_SD2_CD_B__GPIO5_IO9		0x59
 			>;
 		};
+
+		pinctrl_pwm3: pwmgrp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO03__PWM3_OUT		0x30 /* PWM3 */
+			>;
+		};
+		pinctrl_hog_lcd: hog_lcdgrp {
+			fsl,pins = <
+				MX7D_PAD_LCD_RESET__GPIO3_IO4		0x79 /* DIS-RST */
+			>;
+		};
+
+		pinctrl_edt_ts_irq: tsirqgrp {
+			fsl,pins = <
+				MX7D_PAD_ENET1_TX_CLK__GPIO7_IO12	0x59 /* TOUCH-INT */
+			>;
+		};
 	};
 
 };
@@ -319,7 +320,7 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart5>;
 	assigned-clocks = <&clks IMX7D_UART5_ROOT_SRC>;
-	assigned-clock-parents = <&clks IMX7D_OSC_24M_CLK>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
 	status = "okay";
 };
 
