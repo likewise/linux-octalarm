@@ -93,6 +93,42 @@
 	*/
 };
 
+&gpio2 {
+	gpio-line-names = "[GPIO2-IO00]", "[GPIO2-IO01]", "[GPIO2-IO02]", "[GPIO2-IO03]", "[GPIO2-IO04]", "[GPIO2-IO05]", "[GPIO2-IO06]", "[GPIO2-IO07]",
+					  "[GPIO2-IO08]", "[GPIO2-IO09]", "[GPIO2-IO10]", "[GPIO2-IO11]", "OUT3-REL", "[GPIO2-IO13]", "[GPIO2-IO14]", "DIS-FORCEOFF",
+					  "[GPIO2-IO16]", "[GPIO2-IO17]", "[GPIO2-IO18]", "[GPIO2-IO19]", "[GPIO2-IO20]", "[GPIO2-IO21]", "[GPIO2-IO22]", "[GPIO2-IO23]",
+					  "[GPIO2-IO24]", "[GPIO2-IO25]", "[GPIO2-IO26]", "[GPIO2-IO27]", "[GPIO2-IO28]", "[GPIO2-IO29]", "[GPIO2-IO30]", "[GPIO2-IO31]";
+};
+
+&gpio3 {
+	gpio-line-names = "[GPIO3-IO00]", "[GPIO3-IO01]", "[GPIO3-IO02]", "[GPIO3-IO03]", "[GPIO3-IO04]", "[GPIO3-IO05]", "[GPIO3-IO06]", "[GPIO3-IO07]",
+					  "[GPIO3-IO08]", "[GPIO3-IO09]", "[GPIO3-IO10]", "[GPIO3-IO11]", "[GPIO3-IO12]", "[GPIO3-IO13]", "[GPIO3-IO14]", "[GPIO3-IO15]",
+					  "[GPIO3-IO16]", "[GPIO3-IO17]", "[GPIO3-IO18]", "[GPIO3-IO19]", "[GPIO3-IO20]", "[GPIO3-IO21]", "[GPIO3-IO22]", "[GPIO3-IO23]",
+					  "[GPIO3-IO24]", "[GPIO3-IO25]", "[GPIO3-IO26]", "[GPIO3-IO27]", "[GPIO3-IO28]", "[GPIO3-IO29]", "[GPIO3-IO30]", "[GPIO3-IO31]";
+};
+
+
+&gpio4 {
+	gpio-line-names = "[GPIO4-IO00]", "[GPIO4-IO01]", "[GPIO4-IO02]", "[GPIO4-IO03]", "[GPIO4-IO04]", "[GPIO4-IO05]", "[GPIO4-IO06]", "[GPIO4-IO07]",
+					  "[GPIO4-IO08]", "[GPIO4-IO09]", "[GPIO4-IO10]", "[GPIO4-IO11]", "[GPIO4-IO12]", "[GPIO4-IO13]", "[GPIO4-IO14]", "[GPIO4-IO15]",
+					  "[GPIO4-IO16]", "[GPIO4-IO17]", "[GPIO4-IO18]", "[GPIO4-IO19]", "[GPIO4-IO20]", "[GPIO4-IO21]", "[GPIO4-IO22]", "[GPIO4-IO23]",
+					  "[GPIO4-IO24]", "[GPIO4-IO25]", "[GPIO4-IO26]", "[GPIO4-IO27]", "[GPIO4-IO28]", "[GPIO4-IO29]", "[GPIO4-IO30]", "[GPIO4-IO31]";
+};
+
+&gpio5 {
+	gpio-line-names = "[GPIO5-IO00]", "[GPIO5-IO01]", "[GPIO5-IO02]", "[GPIO5-IO03]", "[GPIO5-IO04]", "[GPIO5-IO05]", "[GPIO5-IO06]", "[GPIO5-IO07]",
+					  "[GPIO5-IO08]", "OUT2-OC", "[GPIO5-IO10]", "[GPIO5-IO11]", "[GPIO5-IO12]", "[GPIO5-IO13]", "[GPIO5-IO14]", "[GPIO5-IO15]",
+					  "[GPIO5-IO16]", "[GPIO5-IO17]", "[GPIO5-IO18]", "[GPIO5-IO19]", "[GPIO5-IO20]", "[GPIO5-IO21]", "[GPIO5-IO22]", "[GPIO5-IO23]",
+					  "[GPIO5-IO24]", "[GPIO5-IO25]", "[GPIO5-IO26]", "[GPIO5-IO27]", "[GPIO5-IO28]", "[GPIO5-IO29]", "[GPIO5-IO30]", "[GPIO5-IO31]";
+};
+
+&gpio6 {
+	gpio-line-names = "[GPIO6-IO00]", "[GPIO6-IO01]", "[GPIO6-IO02]", "[GPIO6-IO03]", "[GPIO6-IO04]", "[GPIO6-IO05]", "[GPIO6-IO06]", "[GPIO6-IO07]",
+					  "[GPIO6-IO08]", "[GPIO6-IO09]", "[GPIO6-IO10]", "[GPIO6-IO11]", "[GPIO6-IO12]", "[GPIO6-IO13]", "[GPIO6-IO14]", "[GPIO6-IO15]",
+					  "[GPIO6-IO16]", "[GPIO6-IO17]", "OUT1-OC", "[GPIO6-IO19]", "[GPIO6-IO20]", "GSM-RST", "GSM-WAKE", "[GPIO6-IO23]",
+					  "[GPIO6-IO24]", "[GPIO6-IO25]", "[GPIO6-IO26]", "[GPIO6-IO27]", "[GPIO6-IO28]", "[GPIO6-IO29]", "[GPIO6-IO30]", "[GPIO6-IO31]";
+};
+
 &iomuxc {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hog_1 &pinctrl_hog_2 &pinctrl_hog_lcd>;
