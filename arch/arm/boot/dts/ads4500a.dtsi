@@ -248,6 +248,15 @@
 	status = "okay";
 };
 
+&iomuxc_lpsr {
+	imx7d-phycore {
+		pinctrl_pwm3: pwmgrp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO03__PWM3_OUT		0x30 /* PWM3 */
+			>;
+		};
+	};
+};
 &i2c2 {
 	status = "disabled";
 };
@@ -315,12 +324,6 @@
 				MX7D_PAD_SAI2_TX_BCLK__ECSPI3_MOSI	0x12
 //				MX7D_PAD_SAI2_RX_DATA__ECSPI3_SCLK	0x2
 //				MX7D_PAD_SD2_CD_B__GPIO5_IO9		0x59
-			>;
-		};
-
-		pinctrl_pwm3: pwmgrp {
-			fsl,pins = <
-				MX7D_PAD_GPIO1_IO03__PWM3_OUT		0x30 /* PWM3 */
 			>;
 		};
 		pinctrl_hog_lcd: hog_lcdgrp {
