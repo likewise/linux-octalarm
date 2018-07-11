@@ -1,0 +1,279 @@
+/*
+ * Copyright (C) 2018 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+/ {
+	phytec_leds: leds {
+		compatible = "gpio-leds";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_leds_pebdrpi>;
+		status = "okay";
+
+		led@0 {
+			label = "pebdrpi_led_1";
+			gpios = <&gpio2 8 GPIO_ACTIVE_HIGH>;
+			linux,default-trigger = "gpio";
+			default-state = "on";
+		};
+
+		led@1 {
+			label = "pebdrpi_led_2";
+			gpios = <&gpio2 15 GPIO_ACTIVE_HIGH>;
+			linux,default-trigger = "gpio";
+			default-state = "on";
+		};
+
+	};
+
+	phytec_buttons: gpio-keys {
+		compatible = "gpio-keys";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_btns_pebdrpi>;
+		status = "okay";
+
+		userbtn@0 {
+			label = "pebdrpi_button_1";
+			gpios = <&gpio2 9 GPIO_ACTIVE_HIGH>;
+			linux,code = <0x100>;	/* BTN_MISC */
+		};
+
+		userbtn@1 {
+			label = "pebdrpi_button_2";
+			gpios = <&gpio5 2 GPIO_ACTIVE_HIGH>;
+			linux,code = <0x100>;	/* BTN_MISC */
+		};
+	};
+};
+
+&iomuxc {
+        imx7d-phycore {
+		pinctrl_btns_pebdrpi: btns_pebdrpigrp {
+			fsl,pins = <
+				MX7D_PAD_EPDC_DATA09__GPIO2_IO9		0x79	/* Labeled UART6_TX on schematic */
+				MX7D_PAD_SD1_RESET_B__GPIO5_IO2		0x79	/* Labeled EXP_CONN_MUX3 on schematic */
+			>;
+
+		};
+
+		pinctrl_i2c4: i2c4grp {
+			fsl,pins = <
+				MX7D_PAD_I2C4_SCL__I2C4_SCL		0x4000007e
+				MX7D_PAD_I2C4_SDA__I2C4_SDA		0x4000007e
+			>;
+		};
+
+		pinctrl_leds_pebdrpi: leds_pebdrpigrp {
+			fsl,pins = <
+				MX7D_PAD_EPDC_DATA08__GPIO2_IO8		0x79	/* Labeled UART6_RX on schematic */
+				MX7D_PAD_EPDC_DATA15__GPIO2_IO15	0x79	/* Labeled EXP_CONN_MUX5 on schematic */
+			>;
+		};
+
+		pinctrl_pebdrpi: pebdrpigrp {
+			fsl,pins = <
+				MX7D_PAD_ECSPI2_MOSI__GPIO4_IO21	0x19
+				MX7D_PAD_ECSPI2_SCLK__GPIO4_IO20	0x19
+				MX7D_PAD_SD2_DATA1__GPIO5_IO15		0x19
+				MX7D_PAD_ECSPI2_MISO__GPIO4_IO22	0x19
+				MX7D_PAD_ECSPI2_SS0__GPIO4_IO23		0x19
+				MX7D_PAD_GPIO1_IO15__GPIO1_IO15		0x19
+				MX7D_PAD_GPIO1_IO14__GPIO1_IO14		0x19
+				MX7D_PAD_SD2_RESET_B__GPIO5_IO11	0x19
+				MX7D_PAD_SD2_DATA0__GPIO5_IO14		0x19
+				MX7D_PAD_SD2_CMD__GPIO5_IO13		0x19
+				MX7D_PAD_SD2_DATA2__GPIO5_IO16		0x19
+				MX7D_PAD_SD2_DATA3__GPIO5_IO17		0x19
+			>;
+		};
+
+		pinctrl_sai2: sai2grp {
+			fsl,pins = <
+				MX7D_PAD_SD2_DATA0__SAI2_RX_DATA0	0x1f	/* Labeled X_SD2_DATA0 on schematic */
+				MX7D_PAD_SD2_DATA1__SAI2_TX_BCLK	0x1f	/* Labeled X_SD2_DATA1 on schematic */
+				MX7D_PAD_SD2_DATA2__SAI2_TX_SYNC	0x1f	/* Labeled X_SD2_DATA2 on schematic */
+				MX7D_PAD_SD2_DATA3__SAI2_TX_DATA0	0x30	/* Labeled X_SD2_DATA3 on schematic */
+			>;
+		};
+
+		/* grp should only be used if sai2 and ecspi3 are disabled */
+		pinctrl_sai2_gpio: sai2_gpiogrp {
+			fsl,pins = <
+				MX7D_PAD_SAI2_TX_BCLK__GPIO6_IO20	0x19
+				MX7D_PAD_SAI2_TX_SYNC__GPIO6_IO19	0x19
+				MX7D_PAD_SAI2_RX_DATA__GPIO6_IO21	0x19
+				MX7D_PAD_SAI2_TX_DATA__GPIO6_IO22	0x19
+			>;
+		};
+
+		pinctrl_ecspi1: ecspi1grp {
+			fsl,pins = <
+				MX7D_PAD_ECSPI1_MISO__ECSPI1_MISO	0x2
+				MX7D_PAD_ECSPI1_MOSI__ECSPI1_MOSI	0x2
+				MX7D_PAD_ECSPI1_SCLK__ECSPI1_SCLK	0x2
+				MX7D_PAD_ECSPI1_SS0__ECSPI1_SS0		0x59
+			>;
+		};
+
+		/* grp should only be used if ecspi1 is disabled */
+		pinctrl_ecspi1_gpio: ecspi1_gpiogrp {
+			fsl,pins = <
+				MX7D_PAD_ECSPI1_MISO__GPIO4_IO18	0x19
+				MX7D_PAD_ECSPI1_SS0__GPIO4_IO19		0x19
+				MX7D_PAD_ECSPI1_SCLK__GPIO4_IO16	0x19
+				MX7D_PAD_ECSPI1_MOSI__GPIO4_IO17	0x19
+			>;
+		};
+
+		pinctrl_ecspi3: ecspi3grp {
+			fsl,pins = <
+				MX7D_PAD_SAI2_TX_SYNC__ECSPI3_MISO	0x2	/* Labeled X_SPI3_MISO on schematic */
+				MX7D_PAD_SAI2_TX_BCLK__ECSPI3_MOSI	0x2	/* Labeled X_SPI3_MOSI on schematic */
+				MX7D_PAD_SAI2_RX_DATA__ECSPI3_SCLK	0x2	/* Labeled X_SPI3_SCLK on schematic */
+			>;
+		};
+
+		pinctrl_ecspi3_ss0: ecspi3_ss0grp {
+			fsl,pins = <
+				MX7D_PAD_SAI2_TX_DATA__GPIO6_IO22	0x59	/* Labeled X_SPI3_SS0 on schematic */
+			>;
+		};
+
+		pinctrl_ecspi3_ss2: ecspi3_ss2grp {
+			fsl,pins = <
+				MX7D_PAD_SD2_CD_B__GPIO5_IO9		0x59	/* Labeled X_SD2_CD_B on schematic */
+			>;
+		};
+
+		/* grp should only be used if spi3 is disabled */
+		pinctrl_ecspi3_ss2_gpio: ecspi3_ss2_gpiogrp {
+			fsl,pins = <
+				MX7D_PAD_SD2_CD_B__GPIO5_IO9		0x19
+			>;
+		};
+
+		pinctrl_uart1: uart1grp {
+			fsl,pins = <
+				MX7D_PAD_UART1_RX_DATA__UART1_DCE_RX	0x7e
+				MX7D_PAD_UART1_TX_DATA__UART1_DCE_TX	0x7e
+			>;
+		};
+
+		pinctrl_uart2: uart2grp {
+			fsl,pins = <
+				MX7D_PAD_UART2_RX_DATA__UART2_DCE_RX	0x7e
+				MX7D_PAD_UART2_TX_DATA__UART2_DCE_TX	0x7e
+			>;
+		};
+
+		pinctrl_uart3: uart3grp {
+			fsl,pins = <
+				MX7D_PAD_UART3_RX_DATA__UART3_DCE_RX	0x7e
+				MX7D_PAD_UART3_TX_DATA__UART3_DCE_TX	0x7e
+			>;
+		};
+
+		/* grp should only be used if uart3 is disabled */
+		pinctrl_uart3_gpio: uart3_gpiogrp {
+			fsl,pins = <
+				MX7D_PAD_UART3_TX_DATA__GPIO4_IO5	0x19
+				MX7D_PAD_UART3_RX_DATA__GPIO4_IO4	0x19
+			>;
+		};
+	};
+};
+
+&iomuxc_lpsr {
+	imx7d-phycore {
+		pinctrl_pwm2: pwm2grp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO02__PWM2_OUT		0x30	/* Labeled X_PWM2 on schematic */
+			>;
+		};
+
+		/* grp should only be used if pwm2 is disabled */
+		pinctrl_pwm2_gpio: pwm2_gpiogrp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO02__GPIO1_IO2		0x19
+			>;
+		};
+	};
+};
+
+&i2c4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_i2c4>;
+	clock-frequency = <100000>;
+	status = "okay";
+
+	rpi_hat_eeprom: eeprom@50 {
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_pebdrpi>;
+		compatible = "phytec,phytec-hat";
+		reg = <0x50>;
+		read-only;
+		status = "okay";
+	};
+
+	pebdrpi_eeprom: eeprom@56 {
+		compatible = "onnn,24c32";
+		reg = <0x56>;
+		pagesize = <32>;
+		status = "okay";
+	};
+};
+
+&pwm2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_pwm2>;
+	status = "disabled";
+};
+
+&sai2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sai2>;
+	assigned-clocks = <&clks IMX7D_SAI2_ROOT_SRC>,
+			  <&clks IMX7D_SAI2_ROOT_CLK>;
+	assigned-clock-parents = <&clks IMX7D_PLL_AUDIO_POST_DIV>;
+	assigned-clock-rates = <0>, <36864000>;
+	status = "disabled";
+};
+
+&ecspi1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_ecspi1>;
+	status = "disabled";
+};
+
+&ecspi3 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_ecspi3 &pinctrl_ecspi3_ss0>;
+	status = "disabled";
+};
+
+&uart1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart1>;
+	assigned-clocks = <&clks IMX7D_UART1_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
+	status = "okay";
+};
+
+&uart2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart2>;
+	assigned-clocks = <&clks IMX7D_UART2_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
+	status = "disabled";
+};
+
+&uart3 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart3>;
+	assigned-clocks = <&clks IMX7D_UART3_ROOT_SRC>;
+	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
+	status = "disabled";
+};

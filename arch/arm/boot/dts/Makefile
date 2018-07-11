@@ -580,6 +580,8 @@ dtb-$(CONFIG_SOC_IMX7D) += \
 	imx7d-phyboard-zeta-001-m4.dtb \
 	imx7s-phyboard-zeta-002.dtb \
 	imx7s-phyboard-zeta-002-m4.dtb \
+	imx7d-phyboard-zeta-004.dtb \
+	imx7d-phyboard-zeta-004-m4.dtb \
 	imx7d-pcm-061-2111101e.dtb \
 	imx7d-pcm-061-2111111e.dtb \
 	imx7d-pcm-061-2211101e.dtb

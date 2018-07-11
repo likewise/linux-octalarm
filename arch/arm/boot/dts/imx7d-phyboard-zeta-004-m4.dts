@@ -1,0 +1,30 @@
+/*
+ * Copyright (C) 2018 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+#include "imx7d-phyboard-zeta-004.dts"
+#include "imx7-phyboard-zeta-m4.dtsi"
+
+/ {
+	/* usable memory */
+	memory {
+		linux,usable-memory = <0x80000000 0x1ff00000>,
+					<0xa0000000 0x1ff00000>;
+	};
+
+	m4_tcm: tcml@007f8000 {
+		compatible = "fsl, m4_tcml";
+		reg = <0x007f8000 0x8000>;
+	};
+};
+
+&rpmsg {
+	vdev-nums = <1>;
+	reg = <0xbfff0000 0x10000>;
+	status = "okay";
+};
+
