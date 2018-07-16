@@ -123,8 +123,8 @@
 		reg = <0x5d>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_edt_ts_irq>;
-		interrupt-parent = <&gpio2>;
-		interrupts = <14 0>;
+		interrupt-parent = <&gpio7>;
+		interrupts = <12 0>;
 		reset-gpios = <&gpio3 4 GPIO_ACTIVE_LOW>;
 		status = "okay";
 	};
