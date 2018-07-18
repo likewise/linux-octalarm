@@ -68,6 +68,65 @@
 			pwms = <&pwm3 0 50000 0>;
 		};
 	};
+	
+	sound {
+		compatible = "simple-audio-card";
+		simple-audio-card,name = "Octalarm-audio";
+		
+		simple-audio-card,dai-link@0 {	/* Mono onboard speaker */
+			reg = <0>;
+			frame-master = <&imx7d_sai1_master>;
+			bitclock-master = <&imx7d_sai1_master>;
+			format = "i2s";
+
+			imx7d_sai1_master: cpu {
+				dai-tdm-slot-num = <2>;
+				dai-tdm-slot-width = <32>;
+				sound-dai = <&sai1>;
+			};
+
+			codec {
+				sound-dai = <&tas5720>;
+			};
+		};
+
+		simple-audio-card,dai-link@1 {
+			reg = <1>;
+			format = "i2s";
+			frame-master = <&gsm_module_out>;
+			bitclock-master = <&gsm_module_out>;
+			cpu {
+				sound-dai = <&sai3>;
+			};
+
+			codec {
+				sound-dai = <&gsm_module_out>;
+			};
+		};
+
+		simple-audio-card,dai-link@2 {
+			reg = <2>;
+			format = "i2s";
+			frame-master = <&gsm_module_in>;
+			bitclock-master = <&gsm_module_in>;
+			cpu {
+				sound-dai = <&sai3>;
+			};
+			codec {
+				sound-dai = <&gsm_module_in>;
+			};
+		};
+		
+	};
+	gsm_module_out: gsm-audio-out {
+		#sound-dai-cells = <0>;
+		compatible = "linux,spdif-dit";
+	};
+
+	gsm_module_in: gsm-audio-in {
+		#sound-dai-cells = <0>;
+		compatible = "linux,spdif-dir";
+	};
 };
 
 &gpio1 {
@@ -80,9 +139,9 @@
 	 * "FOO_N" = GPIO line named "FOO" on schematic, active low
 	 */
 	gpio-line-names = "[GPIO1-IO00]", "SPK-SDZ"/*IO1*/, "[GPIO1-IO02]", "[GPIO1-IO03]", "RS485-RE",   "GSM-FORCEOFF", "[GPIO1-IO06]", "[GPIO1-IO07]",
-					  "[GPIO1-IO08]", "[GPIO1-IO09]", "[GPIO1-IO10]", "[GPIO1-IO11]", "[GPIO1-IO12]", "[GPIO1-IO13]", "[GPIO1-IO14]", "[GPIO1-IO15]",
-					  "[GPIO1-IO16]", "[GPIO1-IO17]", "[GPIO1-IO18]", "[GPIO1-IO19]", "[GPIO1-IO20]", "[GPIO1-IO21]", "[GPIO1-IO22]", "[GPIO1-IO23]",
-					  "[GPIO1-IO24]", "[GPIO1-IO25]", "[GPIO1-IO26]", "[GPIO1-IO27]", "[GPIO1-IO28]", "[GPIO1-IO29]", "[GPIO1-IO30]", "[GPIO1-IO31]";
+					  "[GPIO1-IO08]", "OUT4-REL",       "[GPIO1-IO10]", "[GPIO1-IO11]", "[GPIO1-IO12]", "[GPIO1-IO13]", "[GPIO1-IO14]", "[GPIO1-IO15]",
+					  "[GPIO1-IO16]", "[GPIO1-IO17]",   "[GPIO1-IO18]", "[GPIO1-IO19]", "[GPIO1-IO20]", "[GPIO1-IO21]", "[GPIO1-IO22]", "[GPIO1-IO23]",
+					  "[GPIO1-IO24]", "[GPIO1-IO25]",   "[GPIO1-IO26]", "[GPIO1-IO27]", "[GPIO1-IO28]", "[GPIO1-IO29]", "[GPIO1-IO30]", "[GPIO1-IO31]";
 };
 
 &gpio2 {
@@ -166,8 +225,6 @@
 				MX7D_PAD_SAI2_TX_SYNC__GPIO6_IO19	0x0c /* SPK-FAULT, open-drain, no PD/PU: (10k external pull-up) */
 				MX7D_PAD_GPIO1_IO05__GPIO1_IO5		0x1c /* GSM-FORCEOFF; 100k pull-down, slow, x1, hys */
 
-				MX7D_PAD_ENET1_CRS__SAI1_TX_SYNC 	0x1c /* SPK-LRCLK */
-				MX7D_PAD_ENET1_COL__SAI1_TX_DATA0 	0x1c /* SPK-SDIN */
 			>;
 		};
 
@@ -209,6 +266,7 @@
 			status = "okay";
 	};
 	tas5720: tas5720@6c {
+		#sound-dai-cells = <0>;
 		compatible = "ti,tas5720";
 		reg = <0x6c>;
 		dvdd-supply = <&reg_3v3>;
@@ -287,8 +345,8 @@
 			fsl,pins = <
 				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79 /* UART-RX */
 				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79 /* UART-TX */
-				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79 /* UART-CTS */
-				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* UART-RTS, 100k pull-up, hys, x4 */
+//				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79 /* UART-CTS */
+//				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* UART-RTS, 100k pull-up, hys, x4 */
 			>;
 		};
 
@@ -329,8 +387,23 @@
 				MX7D_PAD_ENET1_TX_CLK__GPIO7_IO12	0x59 /* TOUCH-INT */
 			>;
 		};
-	};
-
+        pinctrl_sai1: sai1grp {
+			fsl,pins = <
+				MX7D_PAD_ENET1_RX_CLK__SAI1_TX_BCLK     0x1c
+				MX7D_PAD_ENET1_CRS__SAI1_TX_SYNC 		0x1c /* SPK-LRCLK */
+				MX7D_PAD_ENET1_COL__SAI1_TX_DATA0 		0x1c /* SPK-SDIN */
+//              MX7D_PAD_ENET1_TX_CLK__SAI1_RX_DATA0    0x1f
+			>;
+        };
+        pinctrl_sai3: sai3grp {
+			fsl,pins = <
+				MX7D_PAD_SD1_DATA0__SAI3_RX_DATA0		0x00 /* PCM-DOUT */
+				MX7D_PAD_SD1_DATA1__SAI3_TX_BCLK		0x00 /* PCM-CLK */
+				MX7D_PAD_SD1_DATA2__SAI3_TX_SYNC		0x00 /* PCM-SYNC */
+				MX7D_PAD_SD1_DATA3__SAI3_TX_DATA0		0x00 /* PCM-DIN */
+			>;
+        };
+    };
 };
 
 &uart1 {
@@ -391,8 +464,32 @@
         // WS2812B 0 = 0xff 0x00 0x00
         // WS2812B 1 = 0xff 0xff 0xff
 //        spi-max-frequency = <22857142>;
-        spi-max-frequency = <3000000>;
+        spi-max-frequency = <2500000>;
         status = "okay";
     };
 };
 
+&clks {
+	assigned-clocks = <&clks IMX7D_PLL_AUDIO_POST_DIV>;
+	assigned-clock-rates = <884736000>;
+};
+
+&sai1 {
+	#sound-dai-cells = <0>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sai1>;
+	status = "okay";
+	fsl,sai-synchronous-rx;
+	
+	assigned-clocks = <&clks IMX7D_SAI1_ROOT_SRC>,
+			  <&clks IMX7D_SAI1_ROOT_CLK>;
+	assigned-clock-parents = <&clks IMX7D_PLL_AUDIO_POST_DIV>;
+	assigned-clock-rates = <0>, <24576000>;
+};
+
+&sai3 {
+	#sound-dai-cells = <0>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_sai3>;
+	status = "okay";
+};
