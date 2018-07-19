@@ -146,9 +146,9 @@
 
 &gpio2 {
 	gpio-line-names = "[GPIO2-IO00]", "[GPIO2-IO01]", "[GPIO2-IO02]", "[GPIO2-IO03]", "[GPIO2-IO04]", "[GPIO2-IO05]", "[GPIO2-IO06]", "[GPIO2-IO07]",
-					  "[GPIO2-IO08]", "[GPIO2-IO09]", "[GPIO2-IO10]", "[GPIO2-IO11]", "OUT3-REL",     "[GPIO2-IO13]", "[GPIO2-IO14]", "DIS-FORCEOFF",
+					  "[GPIO2-IO08]", "[GPIO2-IO09]", "MDM-RI",       "[GPIO2-IO11]", "OUT3-REL",     "[GPIO2-IO13]", "[GPIO2-IO14]", "DIS-FORCEOFF",
 					  "[GPIO2-IO16]", "[GPIO2-IO17]", "[GPIO2-IO18]", "[GPIO2-IO19]", "[GPIO2-IO20]", "[GPIO2-IO21]", "[GPIO2-IO22]", "[GPIO2-IO23]",
-					  "[GPIO2-IO24]", "[GPIO2-IO25]", "[GPIO2-IO26]", "[GPIO2-IO27]", "[GPIO2-IO28]", "[GPIO2-IO29]", "[GPIO2-IO30]", "[GPIO2-IO31]";
+					  "[GPIO2-IO24]", "[GPIO2-IO25]", "[GPIO2-IO26]", "[GPIO2-IO27]", "[GPIO2-IO28]", "[GPIO2-IO29]", "MDM-DCD",      "[GPIO2-IO31]";
 };
 
 &gpio3 {
@@ -161,7 +161,7 @@
 
 &gpio4 {
 	gpio-line-names = "[GPIO4-IO00]", "[GPIO4-IO01]", "[GPIO4-IO02]", "[GPIO4-IO03]", "[GPIO4-IO04]", "[GPIO4-IO05]", "[GPIO4-IO06]", "[GPIO4-IO07]",
-					  "[GPIO4-IO08]", "[GPIO4-IO09]", "[GPIO4-IO10]", "[GPIO4-IO11]", "[GPIO4-IO12]", "[GPIO4-IO13]", "[GPIO4-IO14]", "[GPIO4-IO15]",
+					  "[GPIO4-IO08]", "[GPIO4-IO09]", "[GPIO4-IO10]", "[GPIO4-IO11]", "[GPIO4-IO12]", "[GPIO4-IO13]", "MDM-DTR",      "MDM-RST",
 					  "[GPIO4-IO16]", "[GPIO4-IO17]", "[GPIO4-IO18]", "[GPIO4-IO19]", "[GPIO4-IO20]", "[GPIO4-IO21]", "[GPIO4-IO22]", "[GPIO4-IO23]",
 					  "[GPIO4-IO24]", "[GPIO4-IO25]", "[GPIO4-IO26]", "[GPIO4-IO27]", "[GPIO4-IO28]", "[GPIO4-IO29]", "[GPIO4-IO30]", "[GPIO4-IO31]";
 };
@@ -428,6 +428,7 @@
 	assigned-clocks = <&clks IMX7D_UART5_ROOT_SRC>;
 	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
 	status = "okay";
+	uart-has-rtscts;
 };
 
 &uart7 {
@@ -436,6 +437,11 @@
 	assigned-clocks = <&clks IMX7D_UART7_ROOT_SRC>;
 	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
 	status = "okay";
+	uart-has-rtscts;
+
+	dcd-gpios = <&gpio2 30 GPIO_ACTIVE_LOW>;
+	dtr-gpios = <&gpio4 14 GPIO_ACTIVE_LOW>;
+	rng-gpios = <&gpio2 10 GPIO_ACTIVE_LOW>;
 };
 /* MCP3008 for 8 channel ADC */
 &ecspi1 {
