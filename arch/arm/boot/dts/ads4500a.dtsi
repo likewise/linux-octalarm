@@ -101,42 +101,24 @@
 			compatible = "simple-audio-card";
 			simple-audio-card,name = "Octalarm-GSM";
 
-			simple-audio-card,dai-link@0 {
-				reg = <0>;
-				format = "i2s";
-				frame-master = <&gsm_module_out>;
-				bitclock-master = <&gsm_module_out>;
-				cpu {
-					sound-dai = <&sai3>;
-				};
+			simple-audio-card,bitclock-master = <&telephony_link_master>;
+			simple-audio-card,frame-master = <&telephony_link_master>;
+			simple-audio-card,format = "i2s";
+			simple-audio-card,bitclock-inversion;
+			simple-audio-card,frame-inversion;
 
-				codec {
-					sound-dai = <&gsm_module_out>;
-				};
+			simple-audio-card,cpu {
+				sound-dai = <&sai3>;
 			};
 
-			simple-audio-card,dai-link@1 {
-				reg = <1>;
-				format = "i2s";
-				frame-master = <&gsm_module_in>;
-				bitclock-master = <&gsm_module_in>;
-				cpu {
-					sound-dai = <&sai3>;
-				};
-				codec {
-					sound-dai = <&gsm_module_in>;
-				};
+			telephony_link_master: simple-audio-card,codec {
+				sound-dai = <&gsm_codec>;
 			};
 		};
-	};
-	gsm_module_out: gsm-audio-out {
-		#sound-dai-cells = <0>;
-		compatible = "linux,spdif-dit";
-	};
-
-	gsm_module_in: gsm-audio-in {
-		#sound-dai-cells = <0>;
-		compatible = "linux,spdif-dir";
+		gsm_codec: gsm_codec {
+			compatible = "option,gtm601";
+			#sound-dai-cells = <0>;
+		};
 	};
 };
 
