@@ -70,53 +70,64 @@
 	};
 	
 	sound {
-		compatible = "simple-audio-card";
-		simple-audio-card,name = "Octalarm-audio";
+		compatible = "simple-bus";
+		#address-cells = <1>;
+		#size-cells = <0>;
 		
-		simple-audio-card,dai-link@0 {	/* Mono onboard speaker */
+		sound_speaker: sound@0 {
 			reg = <0>;
-			frame-master = <&imx7d_sai1_master>;
-			bitclock-master = <&imx7d_sai1_master>;
-			format = "i2s";
+			compatible = "simple-audio-card";
+			simple-audio-card,name = "Octalarm-Speaker";
+			
+			simple-audio-card,dai-link@0 {	/* Mono onboard speaker */
+				reg = <0>;
+				frame-master = <&imx7d_sai1_master>;
+				bitclock-master = <&imx7d_sai1_master>;
+				format = "i2s";
 
-			imx7d_sai1_master: cpu {
-				dai-tdm-slot-num = <2>;
-				dai-tdm-slot-width = <32>;
-				sound-dai = <&sai1>;
-			};
+				imx7d_sai1_master: cpu {
+					dai-tdm-slot-num = <2>;
+					dai-tdm-slot-width = <32>;
+					sound-dai = <&sai1>;
+				};
 
-			codec {
-				sound-dai = <&tas5720>;
+				codec {
+					sound-dai = <&tas5720>;
+				};
 			};
 		};
-
-		simple-audio-card,dai-link@1 {
+		sound_gsm: sound@1 {
 			reg = <1>;
-			format = "i2s";
-			frame-master = <&gsm_module_out>;
-			bitclock-master = <&gsm_module_out>;
-			cpu {
-				sound-dai = <&sai3>;
+			compatible = "simple-audio-card";
+			simple-audio-card,name = "Octalarm-GSM";
+
+			simple-audio-card,dai-link@0 {
+				reg = <0>;
+				format = "i2s";
+				frame-master = <&gsm_module_out>;
+				bitclock-master = <&gsm_module_out>;
+				cpu {
+					sound-dai = <&sai3>;
+				};
+
+				codec {
+					sound-dai = <&gsm_module_out>;
+				};
 			};
 
-			codec {
-				sound-dai = <&gsm_module_out>;
+			simple-audio-card,dai-link@1 {
+				reg = <1>;
+				format = "i2s";
+				frame-master = <&gsm_module_in>;
+				bitclock-master = <&gsm_module_in>;
+				cpu {
+					sound-dai = <&sai3>;
+				};
+				codec {
+					sound-dai = <&gsm_module_in>;
+				};
 			};
 		};
-
-		simple-audio-card,dai-link@2 {
-			reg = <2>;
-			format = "i2s";
-			frame-master = <&gsm_module_in>;
-			bitclock-master = <&gsm_module_in>;
-			cpu {
-				sound-dai = <&sai3>;
-			};
-			codec {
-				sound-dai = <&gsm_module_in>;
-			};
-		};
-		
 	};
 	gsm_module_out: gsm-audio-out {
 		#sound-dai-cells = <0>;
