@@ -258,6 +258,11 @@
 			reg = <0x49>;
 			status = "okay";
 	};
+	rtc@51 {
+		compatible = "nxp,pcf85263", "nxp,pcf85363";
+		reg = <0x51>;
+		status = "disabled";	/* SDA/SCL lines switched */
+	};
 	tas5720: tas5720@6c {
 		#sound-dai-cells = <0>;
 		compatible = "ti,tas5720";
@@ -298,6 +303,12 @@
 				MX7D_PAD_GPIO1_IO03__PWM3_OUT		0x30 /* PWM3 */
 			>;
 		};
+		pinctrl_uart5: uart5grp {
+			fsl,pins = <
+				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79 /* UART-RX */
+				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79 /* UART-TX */
+			>;
+		};
 	};
 };
 &i2c2 {
@@ -334,12 +345,10 @@
 			>;
 		};
 
-		pinctrl_uart5: uart5grp {
+		pinctrl_uart5_rtscts: uart5grp_rtscts {
 			fsl,pins = <
-				MX7D_PAD_GPIO1_IO06__UART5_DCE_RX	0x79 /* UART-RX */
-				MX7D_PAD_GPIO1_IO07__UART5_DCE_TX	0x79 /* UART-TX */
-//				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79 /* UART-CTS */
-//				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* UART-RTS, 100k pull-up, hys, x4 */
+				MX7D_PAD_SAI1_TX_SYNC__UART5_DCE_CTS	0x79 /* UART-CTS */
+				MX7D_PAD_SAI1_TX_DATA__UART5_DCE_RTS	0x79 /* UART-RTS, 100k pull-up, hys, x4 */
 			>;
 		};
 
@@ -417,7 +426,7 @@
 
 &uart5 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_uart5>;
+	pinctrl-0 = <&pinctrl_uart5>, <&pinctrl_uart5_rtscts>;
 	assigned-clocks = <&clks IMX7D_UART5_ROOT_SRC>;
 	assigned-clock-parents = <&clks IMX7D_PLL_SYS_MAIN_240M_CLK>;
 	status = "okay";
