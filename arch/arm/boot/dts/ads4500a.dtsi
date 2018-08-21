@@ -155,7 +155,7 @@
 &gpio4 {
 	gpio-line-names = "[GPIO4-IO00]", "[GPIO4-IO01]", "[GPIO4-IO02]", "[GPIO4-IO03]", "[GPIO4-IO04]", "[GPIO4-IO05]", "RS485-PWR",    "RS485-DE",
 					  "[GPIO4-IO08]", "[GPIO4-IO09]", "[GPIO4-IO10]", "[GPIO4-IO11]", "[GPIO4-IO12]", "[GPIO4-IO13]", "MDM-DTR",      "MDM-RST",
-					  "[GPIO4-IO16]", "[GPIO4-IO17]", "[GPIO4-IO18]", "[GPIO4-IO19]", "[GPIO4-IO20]", "[GPIO4-IO21]", "[GPIO4-IO22]", "[GPIO4-IO23]",
+					  "[GPIO4-IO16]", "[GPIO4-IO17]", "[GPIO4-IO18]", "ADC-SPI-SS",   "[GPIO4-IO20]", "[GPIO4-IO21]", "[GPIO4-IO22]", "[GPIO4-IO23]",
 					  "[GPIO4-IO24]", "[GPIO4-IO25]", "[GPIO4-IO26]", "[GPIO4-IO27]", "[GPIO4-IO28]", "[GPIO4-IO29]", "[GPIO4-IO30]", "[GPIO4-IO31]";
 };
 
@@ -366,7 +366,8 @@
 				MX7D_PAD_ECSPI1_MISO__ECSPI1_MISO	0x2
 				MX7D_PAD_ECSPI1_MOSI__ECSPI1_MOSI	0x2
 				MX7D_PAD_ECSPI1_SCLK__ECSPI1_SCLK	0x2
-				MX7D_PAD_ECSPI1_SS0__ECSPI1_SS0		0x59
+//				MX7D_PAD_ECSPI1_SS0__ECSPI1_SS0		0x59
+				MX7D_PAD_ECSPI1_SS0__GPIO4_IO19		0x59
 			>;
 		};
 
@@ -450,6 +451,8 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_ecspi1>;
 	status = "okay";
+	cs-gpios = <&gpio4 19 0>;
+
 	mcp3x0x@0 {
 		reg = <0>;
 		compatible = "microchip,mcp3008";
