@@ -125,17 +125,26 @@
                 compatible = "gpio-keys";
                 pinctrl-names = "default";
                 pinctrl-0 = <&pinctrl_powerkeys>;
-                power {
-                        label = "Power-Key";
-                        gpios = <&gpio5 13 GPIO_ACTIVE_HIGH>;
+		// hardware-generated signal, asserted when GPIO5 12 is pressed for >2 seconds
+                shutdown {
+                        label = "SW-SHDWN";
+                        gpios = <&gpio5 13 GPIO_ACTIVE_HIGH>; /* SW-SHDWN */
                         linux,code = <KEY_POWER>;
                         debounce-interval = <1>;
                 };
+		// actual user button marked PWR-OFF on PCB
+                switch {
+                        label = "SW-SWITCH";
+                        gpios = <&gpio5 12 GPIO_ACTIVE_HIGH>; /* SW-SWITCH */
+                        linux,code = <KEY_POWER2>;
+                };
         };
 
-        // output driven by Linux on poweroff, requires CONFIG_POWER_RESET_GPIO
+        // GPIO output driven by Linux on poweroff, requires CONFIG_POWER_RESET_GPIO=y
+	// this drives SW-PWROFF high
         gpio-poweroff {
                 compatible = "gpio-poweroff";
+                label = "SW-PWROFF";
                 gpios = <&gpio5 14 GPIO_ACTIVE_HIGH>; /* SW-PWROFF */
         };
 };
@@ -179,7 +188,7 @@
 
 &gpio5 {
 	gpio-line-names = "[GPIO5-IO00]", "[GPIO5-IO01]", "[GPIO5-IO02]", "[GPIO5-IO03]", "[GPIO5-IO04]", "[GPIO5-IO05]", "[GPIO5-IO06]", "[GPIO5-IO07]",
-					  "[GPIO5-IO08]", "OUT2-OC",      "[GPIO5-IO10]", "[GPIO5-IO11]", "[GPIO5-IO12]", "[GPIO5-IO13]", "[GPIO5-IO14]", "[GPIO5-IO15]",
+					  "[GPIO5-IO08]", "OUT2-OC",      "NFC-IRQ",      "[GPIO5-IO11]", "[GPIO5-IO12]", "[GPIO5-IO13]", "SW-PWROFF", "[GPIO5-IO15]",
 					  "[GPIO5-IO16]", "[GPIO5-IO17]", "[GPIO5-IO18]", "[GPIO5-IO19]", "[GPIO5-IO20]", "[GPIO5-IO21]", "[GPIO5-IO22]", "[GPIO5-IO23]",
 					  "[GPIO5-IO24]", "[GPIO5-IO25]", "[GPIO5-IO26]", "[GPIO5-IO27]", "[GPIO5-IO28]", "[GPIO5-IO29]", "[GPIO5-IO30]", "[GPIO5-IO31]";
 };
@@ -224,9 +233,9 @@
 				MX7D_PAD_SAI1_TX_BCLK__GPIO6_IO13	0x1c /* OWR-RX; 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SAI1_MCLK__GPIO6_IO18		0x1c /* OUT1-OC; 100k pull-down, slow, x1, hys */
 				MX7D_PAD_SD2_CD_B__GPIO5_IO9		0x1c /* OUT2-OC; 100k pull-down, slow, x1, hys */
-				MX7D_PAD_SD2_WP__GPIO5_IO10			0x59 /* NCF-IRQ;  47k pull-up(@TODO) */
+				MX7D_PAD_SD2_WP__GPIO5_IO10		0x59 /* NCF-IRQ; 47k pull-up(@TODO) */
 				MX7D_PAD_SAI2_RX_DATA__GPIO6_IO21	0x1c /* GSM-RST, 100k pull-down, slow, x1, hys */
-				MX7D_PAD_SD1_RESET_B__GPIO5_IO2 	0x1c /* USB-PWR for USB2, disable by default, 100k pull-down */
+				MX7D_PAD_SD1_RESET_B__GPIO5_IO2		0x1c /* USB-PWR for USB2, disable by default, 100k pull-down */
 				MX7D_PAD_UART3_RTS_B__GPIO4_IO6		0x1c /* RS485-PWR, disable by default, 100k pull-down */
 				MX7D_PAD_GPIO1_IO01__GPIO1_IO1		0x1c /* SPK-SDZ, active low shutdown, 100k pull-down */
 				MX7D_PAD_SAI2_TX_SYNC__GPIO6_IO19	0x0c /* SPK-FAULT, open-drain, no PD/PU: (10k external pull-up) */
@@ -268,6 +277,13 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c3>;
 	status = "okay";
+
+	pn532: pn532@24 {
+		compatible = "nxp,pn532-i2c";
+		reg = <0x24>;
+		interrupt-parent = <&gpio5>;
+		interrupts = <10 IRQ_TYPE_EDGE_FALLING>;
+	};	
 
 	lm75@48 {
 			compatible = "lm75";
