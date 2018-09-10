@@ -136,7 +136,7 @@
                 switch {
                         label = "SW-SWITCH";
                         gpios = <&gpio5 12 GPIO_ACTIVE_HIGH>; /* SW-SWITCH */
-                        linux,code = <KEY_POWER2>;
+                        linux,code = <BTN_0>;
                 };
         };
 
