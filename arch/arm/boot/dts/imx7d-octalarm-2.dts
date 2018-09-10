@@ -36,8 +36,8 @@
 
 		display-timings {
 			native-mode = <&timing0>;
-			// timing for Adesys / YES
-			timing0: KWH070KQ20F01 {
+			// timing for YES Optoelectronics YTS700RLAS-01-100C
+			timing0: YTS700RLAS01100C {
                         clock-frequency = <33300000>;
                         hactive = <800>;
                         vactive = <480>;
@@ -45,7 +45,7 @@
                         hfront-porch = <210>;
                         hsync-len = <20>;
                         vback-porch = <17>;
-                        vfront-porch = <23>;
+                        vfront-porch = <22>;
                         vsync-len = <6>;
                         hsync-active = <0>;
                         vsync-active = <0>;
