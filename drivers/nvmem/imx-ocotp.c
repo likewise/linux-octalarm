@@ -18,6 +18,8 @@
  * http://www.gnu.org/copyleft/gpl.html
  */
 
+#define DEBUG
+
 #include <linux/clk.h>
 #include <linux/device.h>
 #include <linux/io.h>
@@ -445,6 +447,8 @@ static int imx_ocotp_probe(struct platform_device *pdev)
 	struct ocotp_priv *priv;
 	struct nvmem_device *nvmem;
 
+	printk(KERN_INFO "imx_ocotp_probe() - LEON\n");
+
 	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
 	if (!priv)
 		return -ENOMEM;
@@ -472,6 +476,8 @@ static int imx_ocotp_probe(struct platform_device *pdev)
 		return PTR_ERR(nvmem);
 
 	platform_set_drvdata(pdev, nvmem);
+
+	printk(KERN_INFO "imx_ocotp_probe() done - LEON\n");
 
 	return 0;
 }

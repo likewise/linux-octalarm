@@ -2,6 +2,8 @@
 //
 // Copyright 2013 Freescale Semiconductor, Inc.
 
+#define DEBUG
+
 #include <linux/clk.h>
 #include <linux/cpu.h>
 #include <linux/cpufreq.h>
@@ -676,6 +678,8 @@ static int imx_thermal_probe(struct platform_device *pdev)
 	int measure_freq;
 	int ret;
 
+	printk(KERN_INFO "imx_thermal_probe() - LEON\n");
+
 	data = devm_kzalloc(&pdev->dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
 		return -ENOMEM;
@@ -746,14 +750,16 @@ static int imx_thermal_probe(struct platform_device *pdev)
 	data->policy = cpufreq_cpu_get(0);
 	if (!data->policy) {
 		pr_debug("%s: CPUFreq policy not found\n", __func__);
-		return -EPROBE_DEFER;
+//		return -EPROBE_DEFER;
 	}
-
+	printk(KERN_INFO "data->policy = %p - LEON\n", data->policy);
+	if (data->policy) {
 	ret = imx_thermal_register_legacy_cooling(data);
 	if (ret) {
 		dev_err(&pdev->dev,
 			"failed to register cpufreq cooling device: %d\n", ret);
 		return ret;
+	}
 	}
 
 	data->thermal_clk = devm_clk_get(&pdev->dev, NULL);
@@ -763,7 +769,9 @@ static int imx_thermal_probe(struct platform_device *pdev)
 			dev_err(&pdev->dev,
 				"failed to get thermal clk: %d\n", ret);
 		cpufreq_cooling_unregister(data->cdev);
-		cpufreq_cpu_put(data->policy);
+		if (data->policy) cpufreq_cpu_put(data->policy);
+		printk(KERN_INFO "data->thermal_clk - LEON\n");
+		
 		return ret;
 	}
 
@@ -778,7 +786,7 @@ static int imx_thermal_probe(struct platform_device *pdev)
 	if (ret) {
 		dev_err(&pdev->dev, "failed to enable thermal clk: %d\n", ret);
 		cpufreq_cooling_unregister(data->cdev);
-		cpufreq_cpu_put(data->policy);
+		if (data->policy) cpufreq_cpu_put(data->policy);
 		return ret;
 	}
 
@@ -794,7 +802,7 @@ static int imx_thermal_probe(struct platform_device *pdev)
 			"failed to register thermal zone device %d\n", ret);
 		clk_disable_unprepare(data->thermal_clk);
 		cpufreq_cooling_unregister(data->cdev);
-		cpufreq_cpu_put(data->policy);
+		if (data->policy) cpufreq_cpu_put(data->policy);
 		return ret;
 	}
 
@@ -830,10 +838,10 @@ static int imx_thermal_probe(struct platform_device *pdev)
 		clk_disable_unprepare(data->thermal_clk);
 		thermal_zone_device_unregister(data->tz);
 		cpufreq_cooling_unregister(data->cdev);
-		cpufreq_cpu_put(data->policy);
+		if (data->policy) cpufreq_cpu_put(data->policy);
 		return ret;
 	}
-
+	printk(KERN_INFO "imx_thermal_probe() done - LEON\n");
 	return 0;
 }
 
@@ -850,7 +858,7 @@ static int imx_thermal_remove(struct platform_device *pdev)
 
 	thermal_zone_device_unregister(data->tz);
 	cpufreq_cooling_unregister(data->cdev);
-	cpufreq_cpu_put(data->policy);
+	if (data->policy) cpufreq_cpu_put(data->policy);
 
 	return 0;
 }

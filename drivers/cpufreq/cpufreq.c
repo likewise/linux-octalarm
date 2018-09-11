@@ -15,6 +15,8 @@
  * published by the Free Software Foundation.
  */
 
+#define DEBUG
+
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/cpu.h>
@@ -245,10 +247,14 @@ struct cpufreq_policy *cpufreq_cpu_get(unsigned int cpu)
 	read_lock_irqsave(&cpufreq_driver_lock, flags);
 
 	if (cpufreq_driver) {
+		printk(KERN_INFO "cpufreq_driver != NULL - LEON\n");
 		/* get the CPU */
 		policy = cpufreq_cpu_get_raw(cpu);
+		printk(KERN_INFO "policy %p - LEON\n", (void *)policy);
 		if (policy)
 			kobject_get(&policy->kobj);
+	} else {
+		printk(KERN_INFO "cpufreq_driver == NULL - LEON\n");
 	}
 
 	read_unlock_irqrestore(&cpufreq_driver_lock, flags);
