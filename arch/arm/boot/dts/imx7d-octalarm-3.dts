@@ -1,0 +1,24 @@
+/*
+ * Copyright (C) 2015 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ *
+ * DTS for PHYTEC kit KPB-01910-001
+ *
+ * Adapted for prototyping at Adesys
+ * Octalarm Prototype dts
+ */
+/dts-v1/;
+
+/* temporary: -3 is same as -2 but with reduced clock speed for eMMC */
+
+#include "imx7d-octalarm-2.dts"
+
+&usdhc3 {
+        tuning-step = <2>;
+	max-frequency = <100000000>;
+};
+
