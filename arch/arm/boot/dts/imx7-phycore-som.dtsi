@@ -30,7 +30,8 @@
 */
 
 &i2c1 {
-	clock-frequency = <400000>;
+	/* see erratum e7805, reduce I2C speed below 384000 */
+	clock-frequency = <375000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c1>;
 	status = "okay";
@@ -125,6 +126,7 @@
 			};
 		};
 	};
+
 	i2c_eeprom: eeprom@50 {
 		compatible = "atmel,24c32";
 		pagesize = <32>;

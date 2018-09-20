@@ -273,7 +273,8 @@
 };
 
 &i2c3 {
-	clock-frequency = <400000>;
+	/* see erratum e7805, reduce I2C speed below 384000 */
+	clock-frequency = <375000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c3>;
 	status = "okay";
@@ -348,6 +349,7 @@
 		};
 	};
 };
+
 &i2c2 {
 	status = "disabled";
 };
