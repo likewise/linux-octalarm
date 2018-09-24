@@ -260,6 +260,8 @@ static int goodix_ts_read_input_report(struct goodix_ts_data *ts, u8 *data)
 
 		if (data[0] & GOODIX_BUFFER_STATUS_READY) {
 			touch_num = data[0] & 0x0f;
+			/* this would cause stack overflow @TODO Fix Bug- Leon */
+			BUG_ON(touch_num > GOODIX_MAX_CONTACTS);
 			if (touch_num > ts->max_touch_num)
 				return -EPROTO;
 
@@ -744,7 +746,7 @@ static int goodix_configure_dev(struct goodix_ts_data *ts)
 						   "touchscreen-inverted-y");
 
 	goodix_read_config(ts);
-
+	printk(KERN_INFO "GOODIX: ts->max_touch_num = %u\n", ts->max_touch_num);
 	error = goodix_request_input_dev(ts);
 	if (error)
 		return error;
