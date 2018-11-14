@@ -13,12 +13,18 @@
  */
 /dts-v1/;
 
-/* temporary: -3 is same as -2 but with reduced clock speed for eMMC */
+#include "ads-phytek-imx7d-pcm61.dtsi"  /* SOM variant as used by Adesys */
 
-#include "imx7d-octalarm-2.dts"
+#include "ads4500b.dtsi" /* Based on ims7-pba-c-09.dtsi */
+#include "ads4500-display.dtsi"
 
-&usdhc3 {
-        tuning-step = <2>;
-	max-frequency = <100000000>;
+/* RTC is now used for U-Boot boot counter */
+&i2c_rtc {
+	status = "disabled";
 };
 
+/* Reduce eMMC speed */
+&usdhc3 {
+        tuning-step = <2>;
+        max-frequency = <100000000>;
+};

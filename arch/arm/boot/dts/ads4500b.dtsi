@@ -1,0 +1,15 @@
+/*
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This file configures the interfaces supported by imx7 Dual
+ * on Adesys ADS4500B
+ *
+ */
+
+#include "ads4500a.dtsi"
+
+&uart7 {
+	fsl,dte-mode;
+};

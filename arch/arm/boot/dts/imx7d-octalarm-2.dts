@@ -16,116 +16,15 @@
 #include "ads-phytek-imx7d-pcm61.dtsi"  /* SOM variant as used by Adesys */
 
 #include "ads4500a.dtsi" /* Based on ims7-pba-c-09.dtsi */
+#include "ads4500-display.dtsi"
 
 /* RTC is now used for U-Boot boot counter */
 &i2c_rtc {
 	status = "disabled";
 };
 
-&lcdif {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_lcdif_dat
-		&pinctrl_lcdif_ctrl>;
-	display = <&display0>;
-	lcd-supply = <&reg_3v3>;
-	status = "okay";
-
-	display0: display {
-		bits-per-pixel = <32>;
-		bus-width = <24>;
-
-		display-timings {
-			native-mode = <&timing0>;
-			// timing for YES Optoelectronics YTS700RLAS-01-100C
-			timing0: YTS700RLAS01100C {
-                        clock-frequency = <33300000>;
-                        hactive = <800>;
-                        vactive = <480>;
-                        hback-porch = <26>;
-                        hfront-porch = <210>;
-                        hsync-len = <20>;
-                        vback-porch = <17>;
-                        vfront-porch = <22>;
-                        vsync-len = <6>;
-                        hsync-active = <0>;
-                        vsync-active = <0>;
-                        de-active = <1>;
-                        pixelclk-active = <1>;
-			};
-		};
-	};
-};
-
-&backlight {
-	pwms = <&pwm3 0 50000 0>;
-};
-
-&iomuxc {
-	imx7d-phycore {
-		pinctrl_lcdif_ctrl: lcdifctrlgrp {
-			fsl,pins = <
-				MX7D_PAD_LCD_CLK__LCD_CLK	0x7e
-				MX7D_PAD_LCD_ENABLE__LCD_ENABLE	0x7e
-				MX7D_PAD_LCD_HSYNC__LCD_HSYNC	0x7e
-				MX7D_PAD_LCD_VSYNC__LCD_VSYNC	0x7e
-			>;
-		};
-
-		pinctrl_lcdif_dat: lcdifdatgrp {
-			fsl,pins = <
-				MX7D_PAD_LCD_DATA00__LCD_DATA0	0x7e
-				MX7D_PAD_LCD_DATA01__LCD_DATA1	0x7e
-				MX7D_PAD_LCD_DATA02__LCD_DATA2	0x7e
-				MX7D_PAD_LCD_DATA03__LCD_DATA3	0x7e
-				MX7D_PAD_LCD_DATA04__LCD_DATA4	0x7e
-				MX7D_PAD_LCD_DATA05__LCD_DATA5	0x7e
-				MX7D_PAD_LCD_DATA06__LCD_DATA6	0x7e
-				MX7D_PAD_LCD_DATA07__LCD_DATA7	0x7e
-				MX7D_PAD_LCD_DATA08__LCD_DATA8	0x7e
-				MX7D_PAD_LCD_DATA09__LCD_DATA9	0x7e
-				MX7D_PAD_LCD_DATA10__LCD_DATA10	0x7e
-				MX7D_PAD_LCD_DATA11__LCD_DATA11	0x7e
-				MX7D_PAD_LCD_DATA12__LCD_DATA12	0x7e
-				MX7D_PAD_LCD_DATA13__LCD_DATA13	0x7e
-				MX7D_PAD_LCD_DATA14__LCD_DATA14	0x7e
-				MX7D_PAD_LCD_DATA15__LCD_DATA15	0x7e
-				MX7D_PAD_LCD_DATA16__LCD_DATA16	0x7e
-				MX7D_PAD_LCD_DATA17__LCD_DATA17	0x7e
-				MX7D_PAD_LCD_DATA18__LCD_DATA18	0x7e
-				MX7D_PAD_LCD_DATA19__LCD_DATA19	0x7e
-				MX7D_PAD_LCD_DATA20__LCD_DATA20	0x7e
-				MX7D_PAD_LCD_DATA21__LCD_DATA21	0x7e
-				MX7D_PAD_LCD_DATA22__LCD_DATA22	0x7e
-				MX7D_PAD_LCD_DATA23__LCD_DATA23	0x7e
-			>;
-		};
-	};
-};
-
-&backlight {
-	compatible = "pwm-backlight";
-		brightness-levels = <0 8 16 24 32 40 48 56 64 72 80 88 96 104
-			112 120 128 136 144 152 160 168 176 184 192 200 208 216 224
-			232 240 248 255>;  // Adesys
-		default-brightness-level = <32>; // Adesys
-	power-supply = <&reg_3v3>;
-	status = "okay";
-};
-
-&i2c3 {
-	clock-frequency = <400000>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_i2c3>;
-	status = "okay";
-
-	gt911: gt911@5d {
-		compatible = "goodix,gt911";
-		reg = <0x5d>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_edt_ts_irq>;
-		interrupt-parent = <&gpio7>;
-		interrupts = <12 0>;
-		reset-gpios = <&gpio3 4 GPIO_ACTIVE_LOW>;
-		status = "okay";
-	};
+/* Reduce eMMC speed */
+&usdhc3 {
+        tuning-step = <2>;
+        max-frequency = <100000000>;
 };

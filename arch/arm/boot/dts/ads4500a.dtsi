@@ -75,6 +75,8 @@
 		#size-cells = <0>;
 		
 		sound_speaker: sound@0 {
+			#address-cells = <1>;
+			#size-cells = <0>;
 			reg = <0>;
 			compatible = "simple-audio-card";
 			simple-audio-card,name = "Octalarm-Speaker";
