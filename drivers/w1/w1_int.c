@@ -59,6 +59,7 @@ static struct w1_master *w1_alloc_dev(u32 id, int slave_count, int slave_ttl,
 	dev->slave_ttl		= slave_ttl;
 	dev->search_count	= w1_search_count;
 	dev->enable_pullup	= w1_enable_pullup;
+	dev->overdrive		= 1;
 
 	/* 1 for w1_process to decrement
 	 * 1 for __w1_remove_master_device to decrement

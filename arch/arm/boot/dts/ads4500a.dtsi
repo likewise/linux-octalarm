@@ -147,6 +147,11 @@
                 label = "SW-PWROFF";
                 gpios = <&gpio5 14 GPIO_ACTIVE_HIGH>; /* SW-PWROFF */
         };
+        
+        onewire@0 {
+            compatible = "w1-gpio";
+            gpios = <&gpio6 13 GPIO_ACTIVE_HIGH>, <&gpio6 12 GPIO_ACTIVE_HIGH>;
+        };
 };
 
 &gpio1 {
@@ -195,7 +200,7 @@
 
 &gpio6 {
 	gpio-line-names = "[GPIO6-IO00]", "[GPIO6-IO01]", "[GPIO6-IO02]", "[GPIO6-IO03]", "[GPIO6-IO04]", "[GPIO6-IO05]", "[GPIO6-IO06]", "[GPIO6-IO07]",
-					  "[GPIO6-IO08]", "[GPIO6-IO09]", "[GPIO6-IO10]", "[GPIO6-IO11]", "[GPIO6-IO12]", "[GPIO6-IO13]", "[GPIO6-IO14]", "[GPIO6-IO15]",
+					  "[GPIO6-IO08]", "[GPIO6-IO09]", "[GPIO6-IO10]", "[GPIO6-IO11]", "OWR-TX",       "OWR-RX",       "[GPIO6-IO14]", "[GPIO6-IO15]",
 					  "[GPIO6-IO16]", "[GPIO6-IO17]", "OUT1-OC",      "[GPIO6-IO19]", "[GPIO6-IO20]", "GSM-RST",      "GSM-WAKE",     "[GPIO6-IO23]",
 					  "[GPIO6-IO24]", "[GPIO6-IO25]", "[GPIO6-IO26]", "[GPIO6-IO27]", "[GPIO6-IO28]", "[GPIO6-IO29]", "[GPIO6-IO30]", "[GPIO6-IO31]";
 };
