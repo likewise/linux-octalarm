@@ -246,6 +246,8 @@ struct w1_master
 	int			enable_pullup;
 	/** 5V strong pullup duration in milliseconds, zero disabled. */
 	int			pullup_duration;
+	/** Support overdrive mode flag, 1 enabled, zero disabled */
+	int			overdrive;
 
 	long			flags;
 

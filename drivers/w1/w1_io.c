@@ -58,6 +58,33 @@ static void w1_delay(unsigned long tm)
 	udelay(tm * w1_delay_parm);
 }
 
+/**
+ * One-wire delays for normal and overdrive modes as specified by Maxim
+ * https://www.maximintegrated.com/en/app-notes/index.mvp/id/126
+ * Values are rounded down to next integer value
+ */
+static int w1_delay_table_us[][2] = {
+	{ 6,   0  }, // 1.0
+	{ 64,  7  }, // 7.5
+	{ 60,  7  }, // 7.5
+	{ 10,  2  }, // 2.5
+	{ 9,   0  }, // 1
+	{ 55,  7  }, // 7
+	{ 0,   2  }, // 2.5
+	{ 480, 70 },
+	{ 70,  8  }, // 8.5
+};
+
+#define W1_DELAY_A(m)	(w1_delay_table_us[0][m->overdrive])
+#define W1_DELAY_B(m)	(w1_delay_table_us[1][m->overdrive])
+#define W1_DELAY_C(m)	(w1_delay_table_us[2][m->overdrive])
+#define W1_DELAY_D(m)	(w1_delay_table_us[3][m->overdrive])
+#define W1_DELAY_E(m)	(w1_delay_table_us[4][m->overdrive])
+#define W1_DELAY_F(m)	(w1_delay_table_us[5][m->overdrive])
+#define W1_DELAY_G(m)	(w1_delay_table_us[6][m->overdrive])
+#define W1_DELAY_H(m)	(w1_delay_table_us[7][m->overdrive])
+#define W1_DELAY_I(m)	(w1_delay_table_us[8][m->overdrive])
+
 static void w1_write_bit(struct w1_master *dev, int bit);
 static u8 w1_read_bit(struct w1_master *dev);
 
@@ -93,14 +120,14 @@ static void w1_write_bit(struct w1_master *dev, int bit)
 
 	if (bit) {
 		dev->bus_master->write_bit(dev->bus_master->data, 0);
-		w1_delay(6);
+		w1_delay(W1_DELAY_A(dev));
 		dev->bus_master->write_bit(dev->bus_master->data, 1);
-		w1_delay(64);
+		w1_delay(W1_DELAY_B(dev));
 	} else {
 		dev->bus_master->write_bit(dev->bus_master->data, 0);
-		w1_delay(60);
+		w1_delay(W1_DELAY_C(dev));
 		dev->bus_master->write_bit(dev->bus_master->data, 1);
-		w1_delay(10);
+		w1_delay(W1_DELAY_D(dev));
 	}
 
 	if(w1_disable_irqs) local_irq_restore(flags);
@@ -180,14 +207,14 @@ static u8 w1_read_bit(struct w1_master *dev)
 	/* sample timing is critical here */
 	local_irq_save(flags);
 	dev->bus_master->write_bit(dev->bus_master->data, 0);
-	w1_delay(6);
+	w1_delay(W1_DELAY_A(dev));
 	dev->bus_master->write_bit(dev->bus_master->data, 1);
-	w1_delay(9);
+	w1_delay(W1_DELAY_E(dev));
 
 	result = dev->bus_master->read_bit(dev->bus_master->data);
 	local_irq_restore(flags);
 
-	w1_delay(55);
+	w1_delay(W1_DELAY_F(dev));
 
 	return result & 0x1;
 }
@@ -336,6 +363,8 @@ int w1_reset_bus(struct w1_master *dev)
 
 	if(w1_disable_irqs) local_irq_save(flags);
 
+	w1_delay(W1_DELAY_G(dev));
+
 	if (dev->bus_master->reset_bus)
 		result = dev->bus_master->reset_bus(dev->bus_master->data) & 0x1;
 	else {
@@ -347,9 +376,9 @@ int w1_reset_bus(struct w1_master *dev)
 		 * cpu for such a short amount of time AND get it back in
 		 * the maximum amount of time.
 		 */
-		w1_delay(500);
+		w1_delay(W1_DELAY_H(dev));
 		dev->bus_master->write_bit(dev->bus_master->data, 1);
-		w1_delay(70);
+		w1_delay(W1_DELAY_I(dev));
 
 		result = dev->bus_master->read_bit(dev->bus_master->data) & 0x1;
 		/* minimum 70 (above) + 430 = 500 us
