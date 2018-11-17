@@ -17,14 +17,3 @@
 
 #include "ads4500a.dtsi" /* Based on ims7-pba-c-09.dtsi */
 #include "ads4500-display.dtsi"
-
-/* RTC is now used for U-Boot boot counter */
-&i2c_rtc {
-	status = "disabled";
-};
-
-/* Reduce eMMC speed */
-&usdhc3 {
-        tuning-step = <2>;
-        max-frequency = <100000000>;
-};

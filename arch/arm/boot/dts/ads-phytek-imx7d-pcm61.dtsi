@@ -20,7 +20,8 @@
 	status = "disabled";
 };
 
-/* Set tuning step to 1 fix tuning errors with emmc boot */
+/* Reduce eMMC speed */
 &usdhc3 {
-	tuning-step = <1>;
+        tuning-step = <2>;
+        max-frequency = <100000000>;
 };
