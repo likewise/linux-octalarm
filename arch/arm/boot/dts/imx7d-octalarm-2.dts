@@ -1,0 +1,19 @@
+/*
+ * Copyright (C) 2015 PHYTEC America, LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ *
+ * DTS for PHYTEC kit KPB-01910-001
+ *
+ * Adapted for prototyping at Adesys
+ * Octalarm Prototype dts
+ */
+/dts-v1/;
+
+#include "ads-phytek-imx7d-pcm61.dtsi"  /* SOM variant as used by Adesys */
+
+#include "ads4500a.dtsi" /* Based on ims7-pba-c-09.dtsi */
+#include "ads4500-display.dtsi"

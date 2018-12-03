@@ -1,0 +1,28 @@
+/*
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This file configures the interfaces supported by imx7 Dual
+ * on Adesys ADS4500B
+ *
+ */
+
+#include "ads4500a.dtsi"
+
+&iomuxc {
+	imx7d-phycore {
+		pinctrl_uart7: uart7grp {
+			fsl,pins = <
+				MX7D_PAD_ECSPI2_SCLK__UART7_DTE_TX	0x79
+				MX7D_PAD_ECSPI2_MISO__UART7_DTE_CTS	0x79
+				MX7D_PAD_ECSPI2_MOSI__UART7_DTE_RX  0x79
+				MX7D_PAD_ECSPI2_SS0__UART7_DTE_RTS	0x79
+			>;
+		};
+    };
+};
+
+&uart7 {
+	fsl,dte-mode;
+};
