@@ -157,6 +157,8 @@ static int __watchdog_ping(struct watchdog_device *wdd)
 
 	wd_data->last_hw_keepalive = jiffies;
 
+	printk(KERN_INFO "__watchdog_ping()\n");
+
 	if (wdd->ops->ping)
 		err = wdd->ops->ping(wdd);  /* ping the watchdog */
 	else
@@ -182,7 +184,7 @@ static int __watchdog_ping(struct watchdog_device *wdd)
 static int watchdog_ping(struct watchdog_device *wdd)
 {
 	struct watchdog_core_data *wd_data = wdd->wd_data;
-
+	printk(KERN_INFO "watchdog_ping()\n");
 	if (!watchdog_active(wdd) && !watchdog_hw_running(wdd))
 		return 0;
 
@@ -202,6 +204,10 @@ static void watchdog_ping_work(struct work_struct *work)
 
 	mutex_lock(&wd_data->lock);
 	wdd = wd_data->wdd;
+	if (wdd && watchdog_active(wdd))
+		printk(KERN_INFO "watchdog_active LEON\n");
+	if (wdd && watchdog_hw_running(wdd))
+		printk(KERN_INFO "watchdog_hw_running LEON\n");
 	if (wdd && (watchdog_active(wdd) || watchdog_hw_running(wdd)))
 		__watchdog_ping(wdd);
 	mutex_unlock(&wd_data->lock);
@@ -466,7 +472,22 @@ static ssize_t pretimeout_show(struct device *dev,
 
 	return sprintf(buf, "%u\n", wdd->pretimeout);
 }
-static DEVICE_ATTR_RO(pretimeout);
+
+static ssize_t pretimeout_store(struct device *dev, struct device_attribute *attr,
+                             const char *buf, size_t count)
+{
+	struct watchdog_device *wdd = dev_get_drvdata(dev);
+        unsigned long val;
+	int err;
+        if (kstrtoul(buf, 0, &val) < 0)
+                return -EINVAL;
+
+	err = watchdog_set_pretimeout(wdd, val);
+
+	return err? err: count;
+}
+
+static DEVICE_ATTR_RW(pretimeout);
 
 static ssize_t identity_show(struct device *dev, struct device_attribute *attr,
 				char *buf)
@@ -601,6 +622,9 @@ static ssize_t watchdog_write(struct file *file, const char __user *data,
 	size_t i;
 	char c;
 
+	printk(KERN_INFO "watchdog_write() LEON\n");
+
+
 	if (len == 0)
 		return 0;
 
@@ -614,8 +638,10 @@ static ssize_t watchdog_write(struct file *file, const char __user *data,
 	for (i = 0; i != len; i++) {
 		if (get_user(c, data + i))
 			return -EFAULT;
-		if (c == 'V')
+		if (c == 'V') {
 			set_bit(_WDOG_ALLOW_RELEASE, &wd_data->status);
+			printk(KERN_INFO "Magic Close === LEON\n");
+		}
 	}
 
 	/* someone wrote to us, so we send the watchdog a keepalive ping */
@@ -623,10 +649,11 @@ static ssize_t watchdog_write(struct file *file, const char __user *data,
 	err = -ENODEV;
 	mutex_lock(&wd_data->lock);
 	wdd = wd_data->wdd;
-	if (wdd)
+	if (wdd) {
 		err = watchdog_ping(wdd);
+	}
 	mutex_unlock(&wd_data->lock);
-
+	printk(KERN_INFO "WATCHDOG === User space ping === LEON\n");
 	if (err < 0)
 		return err;
 
@@ -691,6 +718,7 @@ static long watchdog_ioctl(struct file *file, unsigned int cmd,
 			err = watchdog_start(wdd);
 		break;
 	case WDIOC_KEEPALIVE:
+		printk(KERN_INFO "watchdog_ioctl(KEEPALIVE) LEON\n");
 		if (!(wdd->info->options & WDIOF_KEEPALIVEPING)) {
 			err = -EOPNOTSUPP;
 			break;
