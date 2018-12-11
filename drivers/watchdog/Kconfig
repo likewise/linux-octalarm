@@ -1891,6 +1891,13 @@ config WATCHDOG_PRETIMEOUT_DEFAULT_GOV_PANIC
 	  a watchdog pretimeout event happens, consider that
 	  a watchdog feeder is dead and reboot is unavoidable.
 
+config WATCHDOG_PRETIMEOUT_DEFAULT_GOV_CTRLALTDEL
+	bool "ctrlaltdel"
+	select WATCHDOG_PRETIMEOUT_GOV_CTRLALTDEL
+	help
+	  Try to issue a CTRL-ALT-DEL event into user space to
+          attempt a clean reboot.
+
 endchoice
 
 config WATCHDOG_PRETIMEOUT_GOV_NOOP
@@ -1904,6 +1911,12 @@ config WATCHDOG_PRETIMEOUT_GOV_PANIC
 	help
 	  Panic watchdog pretimeout governor, on watchdog pretimeout
 	  event put the kernel into panic.
+
+config WATCHDOG_PRETIMEOUT_GOV_CTRLALTDEL
+	tristate "CTRL-ALT-DEL watchdog pretimeout governor"
+	help
+	  CTRL-ALT-DEL watchdog pretimeout governor, on watchdog pretimeout
+	  event issue a CTRL-ALT-DEL to userspace.
 
 endif # WATCHDOG_PRETIMEOUT_GOV
 
